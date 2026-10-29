@@ -19,7 +19,7 @@ assets/img, assets/video
 Yerelde görmek için:
 
 ```bash
-python3 -m http.server 8000
+python3 -m http.server 8000 -d public
 ```
 
 ## Müşteriden alınıp güncellenmesi gerekenler
