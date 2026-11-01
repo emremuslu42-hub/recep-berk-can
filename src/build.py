@@ -5,6 +5,7 @@ Kullanım:  python3 src/build.py      (Python 3.8+, Pillow)
 İçerik metinleri src/content.py içindedir.
 """
 import datetime
+import hashlib
 import json
 import re
 import pathlib
@@ -21,6 +22,12 @@ from icons import I, LOGO_PATH, LOGO_VIEWBOX  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 PUBLIC = ROOT / "public"
+
+
+def asset_url(rel):
+    """İçerik özetli adres: dosya değişince tarayıcı önbelleği otomatik yenilenir."""
+    digest = hashlib.sha1((PUBLIC / rel.lstrip("/")).read_bytes()).hexdigest()[:10]
+    return f"{rel}?v={digest}"
 C = COMPANY
 TODAY = datetime.date.today().isoformat()
 LANGS = ("tr", "en")
@@ -251,7 +258,7 @@ def head(lang, title, desc, paths, schema="", preload=""):
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin-ext-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-{preload}<link rel="stylesheet" href="/assets/css/style.css">
+{preload}<link rel="stylesheet" href="{asset_url("/assets/css/style.css")}">
 {schema}</head>
 <body>
 <a class="skip-link" href="#icerik">{UI[lang]["skip"]}</a>
@@ -357,7 +364,7 @@ def footer(lang):
   </div>
 </footer>
 <a class="wa-float" href="{wa_url}" target="_blank" rel="noopener" aria-label="{u["wa"]}">{I["whatsapp"]}</a>
-<script src="/assets/js/main.js" defer></script>
+<script src="{asset_url("/assets/js/main.js")}" defer></script>
 </body>
 </html>
 '''
@@ -1080,7 +1087,7 @@ def notfound():
 <title>Sayfa bulunamadı | BSM Mekanik</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="{asset_url("/assets/css/style.css")}">
 </head>
 <body>
 <main class="notfound">
