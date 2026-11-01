@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://bsmmekanik.com/</loc><xhtml:link rel="alternate" hreflang="tr" href="https://bsmmekanik.com/"/><xhtml:link rel="alternate" hreflang="en" href="https://bsmmechanical.com/en/"/></url>
+  <url><loc>https://bsmmechanical.com/en/</loc><xhtml:link rel="alternate" hreflang="tr" href="https://bsmmekanik.com/"/><xhtml:link rel="alternate" hreflang="en" href="https://bsmmechanical.com/en/"/></url>
+  <url><loc>https://bsmmekanik.com/kurumsal</loc><xhtml:link rel="alternate" hreflang="tr" href="https://bsmmekanik.com/kurumsal"/><xhtml:link rel="alternate" hreflang="en" href="https://bsmmechanical.com/en/about"/></url>
+  <url><loc>https://bsmmechanical.com/en/about</loc><xhtml:link rel="alternate" hreflang="tr" href="https://bsmmekanik.com/kurumsal"/><xhtml:link rel="alternate" hreflang="en" href="https://bsmmechanical.com/en/about"/></url>
+  <url><loc>https://bsmmekanik.com/hizmetler</loc><xhtml:link rel="alternate" hreflang="tr" href="https://bsmmekanik.com/hizmetler"/><xhtml:link rel="alternate" hreflang="en" href="https://bsmmechanical.com/en/services"/></url>
+  <url><loc>https://bsmmechanical.com/en/services</loc><xhtml:link rel="alternate" hreflang="tr" href="https://bsmmekanik.com/hizmetler"/><xhtml:link rel="alternate" hreflang="en" href="https://bsmmechanical.com/en/services"/></url>
+  <url><loc>https://bsmmekanik.com/referanslar</loc><xhtml:link rel="alternate" hreflang="tr" href="https://bsmmekanik.com/referanslar"/><xhtml:link rel="alternate" hreflang="en" href="https://bsmmechanical.com/en/references"/></url>
+  <url><loc>https://bsmmechanical.com/en/references</loc><xhtml:link rel="alternate" hreflang="tr" href="https://bsmmekanik.com/referanslar"/><xhtml:link rel="alternate" hreflang="en" href="https://bsmmechanical.com/en/references"/></url>
+  <url><loc>https://bsmmekanik.com/iletisim</loc><xhtml:link rel="alternate" hreflang="tr" href="https://bsmmekanik.com/iletisim"/><xhtml:link rel="alternate" hreflang="en" href="https://bsmmechanical.com/en/contact"/></url>
+  <url><loc>https://bsmmechanical.com/en/contact</loc><xhtml:link rel="alternate" hreflang="tr" href="https://bsmmekanik.com/iletisim"/><xhtml:link rel="alternate" hreflang="en" href="https://bsmmechanical.com/en/contact"/></url>
+</urlset>

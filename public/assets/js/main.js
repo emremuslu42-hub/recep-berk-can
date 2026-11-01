@@ -2,33 +2,34 @@
   "use strict";
 
   var root = document.documentElement;
-  var header = document.querySelector(".site-header");
+  root.classList.remove("no-js");
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Header: kaydırınca koyu zemine geç
+  // Header: kaydırınca beyaz zemine geç
+  var header = document.querySelector(".site-header");
   function onScroll() {
-    if (!header) return;
-    header.classList.toggle("is-solid", window.scrollY > 40);
+    if (header) header.classList.toggle("is-solid", window.scrollY > 40);
   }
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
   // Mobil menü
   var toggle = document.querySelector(".menu-toggle");
+  function closeMenu() {
+    root.classList.remove("menu-open");
+    if (toggle) toggle.setAttribute("aria-expanded", "false");
+  }
   if (toggle) {
     toggle.addEventListener("click", function () {
       var open = root.classList.toggle("menu-open");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
     });
     document.querySelectorAll(".mobile-nav a").forEach(function (a) {
-      a.addEventListener("click", function () {
-        root.classList.remove("menu-open");
-        toggle.setAttribute("aria-expanded", "false");
-      });
+      a.addEventListener("click", closeMenu);
     });
     window.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && root.classList.contains("menu-open")) {
-        root.classList.remove("menu-open");
-        toggle.setAttribute("aria-expanded", "false");
+        closeMenu();
         toggle.focus();
       }
     });
@@ -37,67 +38,71 @@
   // Görünür olunca beliren öğeler
   var revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
-    );
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.06 });
     revealEls.forEach(function (el) { io.observe(el); });
   } else {
     revealEls.forEach(function (el) { el.classList.add("is-visible"); });
   }
 
   // Sayaçlar
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var counters = document.querySelectorAll("[data-count]");
+  var locale = root.lang === "en" ? "en-US" : "tr-TR";
   function runCounter(el) {
     var target = parseInt(el.getAttribute("data-count"), 10);
-    if (reduceMotion || !target) { el.textContent = target.toLocaleString("tr-TR"); return; }
+    if (reduceMotion || !target) { el.textContent = target.toLocaleString(locale); return; }
     var start = null;
-    var duration = 1600;
     function step(ts) {
       if (!start) start = ts;
-      var p = Math.min((ts - start) / duration, 1);
-      var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased).toLocaleString("tr-TR");
+      var p = Math.min((ts - start) / 1600, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))).toLocaleString(locale);
       if (p < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   }
+  var counters = document.querySelectorAll("[data-count]");
   if ("IntersectionObserver" in window) {
     var co = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          runCounter(entry.target);
-          co.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) { runCounter(entry.target); co.unobserve(entry.target); }
       });
     }, { threshold: 0.4 });
     counters.forEach(function (el) { co.observe(el); });
-  } else {
-    counters.forEach(runCounter);
   }
 
-  // Ürünler sayfası: alt menüde aktif bölümü işaretle
-  var indexLinks = document.querySelectorAll(".product-index a");
-  if (indexLinks.length && "IntersectionObserver" in window) {
+  // Yatay proje kaydırıcısı
+  document.querySelectorAll("[data-slider]").forEach(function (wrap) {
+    var track = wrap.querySelector(".slider");
+    var prev = wrap.querySelector("[data-prev]");
+    var next = wrap.querySelector("[data-next]");
+    function by(dir) {
+      var card = track.firstElementChild;
+      var w = card ? card.getBoundingClientRect().width + 20 : 300;
+      track.scrollBy({ left: dir * w, behavior: reduceMotion ? "auto" : "smooth" });
+    }
+    if (prev) prev.addEventListener("click", function () { by(-1); });
+    if (next) next.addEventListener("click", function () { by(1); });
+  });
+
+  // Hizmetler sayfası: alt menüde aktif bölüm
+  var navLinks = document.querySelectorAll(".service-nav a");
+  if (navLinks.length && "IntersectionObserver" in window) {
     var map = {};
-    indexLinks.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
+    navLinks.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
     var so = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          indexLinks.forEach(function (a) { a.classList.remove("is-active"); });
-          var link = map[entry.target.id];
-          if (link) {
-            link.classList.add("is-active");
-            link.scrollIntoView({ block: "nearest", inline: "center", behavior: reduceMotion ? "auto" : "smooth" });
-          }
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(function (a) { a.classList.remove("is-active"); });
+        var link = map[entry.target.id];
+        if (link) {
+          link.classList.add("is-active");
+          var bar = link.closest("ul");
+          bar.scrollTo({ left: link.offsetLeft - bar.clientWidth / 2 + link.clientWidth / 2, behavior: reduceMotion ? "auto" : "smooth" });
         }
       });
     }, { rootMargin: "-45% 0px -50% 0px" });
@@ -107,40 +112,67 @@
     });
   }
 
-  // Videoyu hareket azaltma tercihinde durdur
-  if (reduceMotion) {
-    document.querySelectorAll("video[autoplay]").forEach(function (v) {
-      v.removeAttribute("autoplay");
-      v.pause();
+  // Referans filtresi
+  var filterBar = document.querySelector("[data-filter]");
+  if (filterBar) {
+    var cards = document.querySelectorAll(".ref-card");
+    var empty = document.querySelector(".ref-empty");
+    function apply(tag) {
+      var shown = 0;
+      cards.forEach(function (c) {
+        var ok = tag === "all" || (" " + c.getAttribute("data-tags") + " ").indexOf(" " + tag + " ") > -1;
+        c.hidden = !ok;
+        if (ok) shown++;
+      });
+      if (empty) empty.hidden = shown > 0;
+      filterBar.querySelectorAll("button").forEach(function (b) {
+        b.setAttribute("aria-pressed", b.getAttribute("data-tag") === tag ? "true" : "false");
+      });
+    }
+    filterBar.addEventListener("click", function (e) {
+      var btn = e.target.closest("button");
+      if (!btn) return;
+      var tag = btn.getAttribute("data-tag");
+      apply(tag);
+      history.replaceState(null, "", tag === "all" ? location.pathname : "#" + tag);
     });
+    var initial = location.hash.slice(1);
+    if (initial && filterBar.querySelector('[data-tag="' + initial + '"]')) apply(initial);
   }
 
-  // İletişim formu: sunucu entegrasyonu yapılana kadar e-posta istemcisini açar
+  // Hareket azaltma tercihinde videoları durdur
+  if (reduceMotion) {
+    document.querySelectorAll("video[autoplay]").forEach(function (v) { v.removeAttribute("autoplay"); v.pause(); });
+  }
+
+  // İletişim formu: e-posta istemcisini doldurulmuş olarak açar
   var form = document.querySelector("[data-contact-form]");
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!form.reportValidity()) return;
-      var data = new FormData(form);
-      var to = form.getAttribute("data-mailto");
-      var subject = "Teklif / Bilgi Talebi — " + (data.get("konu") || "Genel");
+      var d = new FormData(form);
+      var L = form.dataset;
+      var subject = L.subject + " — " + (d.get("konu") || "-");
       var body = [
-        "Ad Soyad: " + data.get("ad"),
-        "Firma: " + (data.get("firma") || "-"),
-        "E-posta: " + data.get("eposta"),
-        "Telefon: " + (data.get("telefon") || "-"),
-        "Konu: " + (data.get("konu") || "-"),
+        L.lName + ": " + d.get("ad"),
+        L.lCompany + ": " + (d.get("firma") || "-"),
+        L.lEmail + ": " + d.get("eposta"),
+        L.lPhone + ": " + (d.get("telefon") || "-"),
+        L.lTopic + ": " + (d.get("konu") || "-"),
         "",
-        data.get("mesaj")
+        d.get("mesaj")
       ].join("\n");
-      window.location.href = "mailto:" + to + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      window.location.href = "mailto:" + L.mailto + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
       var status = form.querySelector(".form-status");
-      if (status) status.textContent = "Teşekkürler. E-posta uygulamanız açılıyor; mesajınızı göndermeniz yeterli.";
+      if (status) status.textContent = L.success;
     });
+    var pre = new URLSearchParams(location.search).get("hizmet");
+    var sel = form.querySelector("select[name=konu]");
+    if (pre && sel) {
+      Array.prototype.forEach.call(sel.options, function (o) { if (o.dataset.key === pre) sel.value = o.value; });
+    }
   }
 
-  // Footer yılı
-  document.querySelectorAll("[data-year]").forEach(function (el) {
-    el.textContent = new Date().getFullYear();
-  });
+  document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();

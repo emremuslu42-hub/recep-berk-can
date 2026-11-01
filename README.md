@@ -1,44 +1,58 @@
-# RBC Mühendislik — Kurumsal Web Sitesi
+# BSM Mekanik — Kurumsal Web Sitesi
 
-Karayolu dışı endüstriyel taşıma sistemleri (transfer arabaları, AGV, SPMT, hava yastıklı taşıyıcılar, pota arabaları) üreten bir mühendislik firması için statik kurumsal site.
+BSM Mekanik Mühendislik İnşaat San. ve Tic. Ltd. Şti. için iki dilli (TR/EN) statik kurumsal site.
+Cloudflare Workers (statik asset) üzerinde yayınlanır; derleme sunucusu gerektirmez.
 
-Derleme adımı yoktur: saf HTML + CSS + JS. Herhangi bir statik hostinge (cPanel, Netlify, Vercel, GitHub Pages) klasör olduğu gibi yüklenebilir.
+- Türkçe: `https://bsmmekanik.com/` (kök)
+- İngilizce: `https://bsmmechanical.com/en/`
+- İki alan adı da sitenin tamamını açar; dil seçimi sağ üstteki TR/EN düğmesiyle yapılır.
+
+## Klasör yapısı
 
 ```
-index.html       Ana sayfa (video hero, ürünler, sektörler, süreç, projeler)
-kurumsal.html    Hakkımızda, misyon/vizyon, tarihçe, Ar-Ge, sertifikalar
-urunler.html     6 ürün grubu, teknik özellik tabloları
-sektorler.html   7 sektör
-projeler.html    Referans projeler
-iletisim.html    İletişim bilgileri, teklif formu, harita
-assets/css/style.css   Tasarım sistemi (renkler :root içinde)
-assets/js/main.js      Menü, animasyonlar, sayaçlar, form
-assets/img, assets/video
+src/content.py   Tüm içerik: firma bilgileri, hizmetler, 31 referans proje (TR/EN)
+src/build.py     Sayfa şablonları; public/ altındaki HTML dosyalarını üretir
+src/icons.py     SVG ikonlar ve vektör logo
+public/          Yayınlanan site (Cloudflare bu klasörü sunar)
+  index.html, kurumsal.html, hizmetler.html, referanslar.html, iletisim.html
+  en/            İngilizce sayfalar
+  assets/        CSS, JS, görseller, videolar
+wrangler.jsonc   Cloudflare Workers yapılandırması
 ```
 
-Yerelde görmek için:
+## İçerik güncelleme
+
+1. `src/content.py` (veya şablon için `src/build.py`) dosyasını düzenleyin.
+2. Sayfaları yeniden üretin:
+
+```bash
+python3 src/build.py
+```
+
+3. Commit + push; Cloudflare otomatik yayınlar.
+
+`public/*.html` dosyalarını elle düzenlemeyin, bir sonraki üretimde üzerine yazılır.
+
+Yerelde önizleme (uzantısız adresler için `.html` eklemeniz gerekebilir):
 
 ```bash
 python3 -m http.server 8000 -d public
 ```
 
-## Müşteriden alınıp güncellenmesi gerekenler
+## Görseller
 
-Aşağıdaki içerikler **yer tutucudur**, gerçek bilgilerle değiştirilmelidir (tüm sayfalarda geçer, toplu bul-değiştir yeterli):
+- **Referans görselleri** (`public/assets/img/ref/`): Firmanın referans listesindeki (Excel) görseller.
+- **Temsili görseller**: Aşağıdaki 6 projenin listede görseli olmadığı için yapı türüne uygun Unsplash
+  görselleri kullanıldı. Gerçek proje fotoğrafları geldiğinde aynı dosya adıyla değiştirilmeli:
+  `besiktas-carsisi`, `nil-kuyumculuk`, `ozbarak-otel`, `arcelik-ersan`, `airties-ofis`, `cokertme-evi` (.webp)
+- **Wikimedia Commons** (CC BY-SA 4.0, künyesi referanslar sayfasında):
+  `robert-koleji.webp` — Mitchell Hall, Yaguzi · `ozyegin.webp` — Özyeğin University Campus, Bo yaser
+- **Hizmet görselleri**: [Unsplash](https://unsplash.com/license)
+- **Videolar**: [Pexels](https://www.pexels.com/license/) — `hero.mp4` (#34775814), `tesisat.mp4` (#30243437)
+- **Logo**: Firmanın logo dosyasından vektöre çevrildi (`src/icons.py`, `assets/img/logo-mark.svg`).
 
-- Firma adı ve logo: `RBC Mühendislik`, logo SVG'si header/footer'da ve `assets/img/favicon.svg`
-- Telefon `+90 (262) 000 00 00`, e-posta `info@rbcmuhendislik.com.tr`, adres
-- İstatistikler (350+ sistem, 20+ ülke vb.), tarihçe yılları, proje örnekleri
-- Sertifikalar (ISO 9001/14001/45001, CE) — yalnızca firmada gerçekten olanlar kalmalı
-- Sosyal medya linkleri ve KVKK / Çerez metinleri (`href="#"`)
-- Harita konumu (`iletisim.html` içindeki OpenStreetMap iframe `bbox` değeri)
-- İletişim formu şu an ziyaretçinin e-posta uygulamasını açar; sunucu tarafı form (PHP mail, Formspree vb.) bağlanabilir
+## Formlar
 
-Firmanın kendi ürün/saha fotoğrafları geldiğinde `assets/img` içindeki aynı isimli dosyalar değiştirilerek kolayca güncellenebilir.
-
-## Görsel ve video kaynakları
-
-Tüm medya ücretsiz ticari kullanıma izin veren lisanslarla alınmıştır:
-
-- Fotoğraflar: [Unsplash](https://unsplash.com/license) (Unsplash License)
-- Videolar: [Pexels](https://www.pexels.com/license/) (Pexels License) — `hero.mp4` (çelikhane, video #6997690), `kivilcim.mp4` (fırın kıvılcımları, video #6997856)
+İletişim formu ziyaretçinin e-posta uygulamasını mert@ ve berk@ adreslerine doldurulmuş olarak açar.
+İleride doğrudan gönderim istenirse (Formspree, Cloudflare Worker + e-posta vb.) bağlanabilir.
+WhatsApp düğmesi Mert'in cep numarasına bağlıdır (`content.py` → `whatsapp`).
