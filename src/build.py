@@ -536,7 +536,9 @@ def hero_slider(lang):
         hidden = "" if i == 0 else " hidden"
         name = escape(rname(r, lang))
         slides += (f'<figure class="rh-slide{active}" data-i="{i}" aria-roledescription="slide" aria-label="{i + 1} / {n}">'
-                   f'{img(r["src"], rname(r, lang), lazy=i > 0, priority=i == 0, sizes="(min-width: 1000px) 720px, 100vw")}</figure>')
+                   f'{img(r["src"], rname(r, lang), lazy=i > 0, priority=i == 0, sizes="(min-width: 1000px) 720px, 100vw")}'
+                   f'<figcaption class="rh-cap"><span class="rh-cap-tag">{rcat(r, lang)}</span><strong>{name}</strong>'
+                   f'<span>{escape(r["client"] + " · " if r["client"] else "")}{r["loc"]} · {ryear(r, lang)}</span></figcaption></figure>')
         chips = "".join(f"<li>{work(w, lang)}</li>" for w in r["works"][:4])
         client = f'<span class="rh-client">{escape(r["client"])}</span>' if r["client"] else ""
         infos += f'''<div class="rh-info{active}" data-i="{i}"{hidden}>

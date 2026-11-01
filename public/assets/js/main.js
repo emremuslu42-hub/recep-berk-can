@@ -107,7 +107,11 @@
       infos.forEach(function (s, i) { s.classList.toggle("is-active", i === idx); s.hidden = i !== idx; });
       thumbs.forEach(function (t, i) {
         t.classList.toggle("is-active", i === idx);
-        if (i === idx) t.setAttribute("aria-current", "true"); else t.removeAttribute("aria-current");
+        if (i === idx) {
+          t.setAttribute("aria-current", "true");
+          var strip = t.parentNode;
+          if (strip.scrollWidth > strip.clientWidth) strip.scrollTo({ left: t.offsetLeft - strip.offsetLeft - 8, behavior: reduceMotion ? "auto" : "smooth" });
+        } else t.removeAttribute("aria-current");
       });
       if (cur) cur.textContent = (idx + 1 < 10 ? "0" : "") + (idx + 1);
       var nextImg = slides[(idx + 1) % slides.length].querySelector("img");
