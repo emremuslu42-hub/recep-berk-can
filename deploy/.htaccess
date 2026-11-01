@@ -1,0 +1,63 @@
+# BSM Mekanik — Apache ayarı (mod_rewrite, mod_headers, mod_expires gerekli)
+# Bu dosyayı site klasörünün köküne (public/ içeriğinin yanına) kopyalayın.
+
+Options -Indexes -MultiViews
+DirectorySlash Off
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+AddDefaultCharset utf-8
+AddType application/manifest+json .webmanifest
+
+RewriteEngine On
+
+# Çıplak alan adları www'ye
+RewriteCond %{HTTP_HOST} ^bsmmekanik\.com$ [NC]
+RewriteRule ^ https://www.bsmmekanik.com%{REQUEST_URI} [R=301,L]
+RewriteCond %{HTTP_HOST} ^bsmmechanical\.com$ [NC]
+RewriteRule ^ https://www.bsmmechanical.com%{REQUEST_URI} [R=301,L]
+
+# 404 sayfası yalnızca hata yanıtı olarak sunulur
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^404\.html$ - [R=404,L]
+
+# Cloudflare'a özel dosyalar sunulmaz
+RewriteRule ^_(headers|redirects)$ - [R=404,L]
+
+# Eski / alternatif adresler
+RewriteRule ^en/references/?$ /en/projects [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+((?:[^?\s]*/)?)index\.html[?\s]
+RewriteRule ^ /%1 [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+([^?\s]+)\.html[?\s]
+RewriteCond %1 !^404$
+RewriteRule ^ /%1 [R=301,L]
+
+# Klasör adresleri sonda / ile (/en → /en/), aynı adlı .html yoksa
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_FILENAME}.html !-f
+RewriteRule ^(.+[^/])$ /$1/ [R=301,L]
+
+# Temiz adresler: /kurumsal → kurumsal.html
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  # Demo adresi arama motorlarına kapalı
+  SetEnvIfNoCase Host ^bsmmekanik\.mesakyazilim\.com$ BSM_DEMO
+  Header always set X-Robots-Tag "noindex" env=BSM_DEMO
+  <FilesMatch "\.(css|js|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(webp|jpg|png|svg|mp4)$">
+    Header set Cache-Control "public, max-age=86400"
+  </FilesMatch>
+  <FilesMatch "\.woff2$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript image/svg+xml application/xml text/plain application/manifest+json
+</IfModule>

@@ -81,3 +81,23 @@ Alan adları bağlandıktan sonra yapılacaklar:
 İletişim formu ziyaretçinin e-posta uygulamasını mert@ ve berk@ adreslerine doldurulmuş olarak açar.
 İleride doğrudan gönderim istenirse (Formspree, Cloudflare Worker + e-posta vb.) bağlanabilir.
 WhatsApp düğmesi Mert'in cep numarasına bağlıdır (`content.py` → `whatsapp`).
+
+## Kendi sunucunda (VDS) yayın
+
+`deploy/` klasörü:
+- `setup-server.sh` — Ubuntu/Debian için tek komutla kurulum: nginx, SSL (Let's Encrypt), siteyi GitHub'dan çekme ve 5 dakikada bir otomatik güncelleme.
+- `nginx.conf` — temiz URL'ler, 404, www yönlendirmesi, önbellek, demo adresinde `noindex`.
+- `.htaccess` — Apache kullanılan sunucular için aynı kurallar.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/emremuslu42-hub/recep-berk-can/claude/bold-edison-kwvvmm/deploy/setup-server.sh -o setup-server.sh
+bash setup-server.sh demo      # bsmmekanik.mesakyazilim.com
+bash setup-server.sh domains   # alan adları sunucuyu gösterdikten sonra
+```
+
+Alan adları için GoDaddy'de girilecek kayıtlar (her iki domainde; MX/TXT kayıtlarına dokunulmaz):
+
+| Tür | Ad | Değer |
+|---|---|---|
+| A | `@` | VDS IP adresi |
+| A | `www` | VDS IP adresi |
