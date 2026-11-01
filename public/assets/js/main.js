@@ -89,6 +89,60 @@
     if (next) next.addEventListener("click", function () { by(1); });
   });
 
+  // Açılış referans galerisi
+  var hero = document.querySelector("[data-hero]");
+  if (hero) {
+    var slides = hero.querySelectorAll(".rh-slide");
+    var infos = hero.querySelectorAll(".rh-info");
+    var thumbs = hero.querySelectorAll(".rh-thumb");
+    var cur = hero.querySelector("[data-cur]");
+    var bar = hero.querySelector(".rh-progress");
+    var DUR = 6000;
+    var idx = 0, timer = null, paused = false;
+    hero.style.setProperty("--rh-dur", DUR + "ms");
+
+    function show(n) {
+      idx = (n + slides.length) % slides.length;
+      slides.forEach(function (s, i) { s.classList.toggle("is-active", i === idx); });
+      infos.forEach(function (s, i) { s.classList.toggle("is-active", i === idx); s.hidden = i !== idx; });
+      thumbs.forEach(function (t, i) {
+        t.classList.toggle("is-active", i === idx);
+        if (i === idx) t.setAttribute("aria-current", "true"); else t.removeAttribute("aria-current");
+      });
+      if (cur) cur.textContent = (idx + 1 < 10 ? "0" : "") + (idx + 1);
+      var nextImg = slides[(idx + 1) % slides.length].querySelector("img");
+      if (nextImg) nextImg.loading = "eager";
+      restart();
+    }
+    function restart() {
+      clearTimeout(timer);
+      if (bar) { bar.classList.remove("is-running"); void bar.offsetWidth; }
+      if (paused || reduceMotion) return;
+      if (bar) bar.classList.add("is-running");
+      timer = setTimeout(function () { show(idx + 1); }, DUR);
+    }
+    hero.querySelector("[data-prev]").addEventListener("click", function () { show(idx - 1); });
+    hero.querySelector("[data-next]").addEventListener("click", function () { show(idx + 1); });
+    thumbs.forEach(function (t) {
+      t.addEventListener("click", function () { show(parseInt(t.getAttribute("data-go"), 10)); });
+    });
+    var visual = hero.querySelector(".ref-hero-visual");
+    visual.addEventListener("mouseenter", function () { paused = true; restart(); });
+    visual.addEventListener("mouseleave", function () { paused = false; restart(); });
+    hero.addEventListener("focusin", function () { paused = true; restart(); });
+    hero.addEventListener("focusout", function () { paused = false; restart(); });
+    document.addEventListener("visibilitychange", function () { paused = document.hidden; restart(); });
+    var sx = null;
+    visual.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; }, { passive: true });
+    visual.addEventListener("touchend", function (e) {
+      if (sx === null) return;
+      var dx = e.changedTouches[0].clientX - sx;
+      if (Math.abs(dx) > 40) show(idx + (dx < 0 ? 1 : -1));
+      sx = null;
+    });
+    restart();
+  }
+
   // Hizmetler sayfası: alt menüde aktif bölüm
   var navLinks = document.querySelectorAll(".service-nav a");
   if (navLinks.length && "IntersectionObserver" in window) {

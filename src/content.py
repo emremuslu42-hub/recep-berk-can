@@ -21,7 +21,7 @@ COMPANY = {
 # ---------------------------------------------------------------- Hizmetler
 SERVICES = [
     {
-        "key": "mekanik", "icon": "pipe", "img": "mekanik-tesisat",
+        "key": "mekanik", "slug": {"tr": "mekanik-tesisat", "en": "mechanical-installation"}, "detail": {"tr": "Sıhhi tesisattan teknolojik su hatlarına kadar tüm boru tesisatlarını; malzeme seçimi, hidrolik hesaplar ve yapının kullanım senaryosu doğrultusunda planlıyoruz. Mevcut binalarda ise işletmeyi aksatmadan revizyon ve iyileştirme çalışmaları yürütüyoruz.", "en": "Every pipework system we deliver, from plumbing to process water, is planned around material selection, hydraulic calculations and how the building will actually be used. In occupied buildings, we carry out retrofits and upgrades with minimal disruption to day-to-day operations."}, "icon": "pipe", "img": "mekanik-tesisat",
         "tr": {
             "name": "Mekanik Tesisat",
             "short": "Sıhhi tesisat, temiz ve pis su, teknolojik su sistemleri ile montaj ve revizyon işleri.",
@@ -29,14 +29,14 @@ SERVICES = [
             "items": ["Genel mekanik tesisat uygulamaları", "Sıhhi tesisat sistemleri", "Temiz su ve pis su tesisatları", "Teknolojik su tesisatları", "Mekanik tesisat montaj ve revizyon işleri"],
         },
         "en": {
-            "name": "Mechanical Installation",
-            "short": "Plumbing, clean and waste water, process water systems, installation and retrofit works.",
-            "intro": "We provide design, procurement, installation and commissioning of mechanical systems for residential, commercial and industrial facilities.",
-            "items": ["General mechanical installations", "Plumbing systems", "Clean and waste water systems", "Process water systems", "Mechanical installation and retrofit works"],
+            "name": "Mechanical Installations",
+            "short": "Plumbing, domestic water and drainage, process water systems, new installations and retrofits.",
+            "intro": "We design, procure, install and commission mechanical systems for residential, commercial and industrial buildings.",
+            "items": ["General mechanical installations", "Plumbing systems", "Domestic water and drainage", "Process water systems", "Mechanical installation and retrofit works"],
         },
     },
     {
-        "key": "yangin", "icon": "flame", "img": "yangin",
+        "key": "yangin", "slug": {"tr": "yangin-sondurme-sistemleri", "en": "fire-protection-systems"}, "detail": {"tr": "Sprinkler ve hidrant hatlarından yangın pompa dairelerine, algılama ve anons sistemlerine kadar tüm yangın güvenliği altyapısını yapının risk sınıfına ve yönetmeliklere uygun şekilde projelendirip uyguluyoruz. Fabrika, depo, otel, okul ve ofis gibi farklı yapı türlerinde sulu, kuru tip ve sprinkler sistemlerinde deneyime sahibiz.", "en": "We design and install complete fire safety systems, from sprinkler and hydrant mains to fire pump rooms, detection and voice alarm, matched to each building's hazard classification and current regulations. Our experience covers wet, dry and sprinkler systems in factories, warehouses, hotels, schools and offices."}, "icon": "flame", "img": "yangin",
         "tr": {
             "name": "Yangın Söndürme Sistemleri",
             "short": "Sprinkler, sulu ve kuru tip söndürme, yangın pompaları, algılama ve anons sistemleri.",
@@ -45,13 +45,13 @@ SERVICES = [
         },
         "en": {
             "name": "Fire Protection Systems",
-            "short": "Sprinklers, wet and dry systems, fire pumps, detection and voice alarm systems.",
-            "intro": "We deliver fire suppression, detection and alarm solutions in line with national and international standards to keep buildings and industrial facilities safe.",
-            "items": ["Fire suppression piping", "Wet and dry type fire systems", "Sprinkler systems", "Fire pump systems", "Fire detection systems", "Voice alarm and evacuation systems"],
+            "short": "Automatic sprinklers, wet and dry suppression, fire pump sets, fire detection and voice alarm.",
+            "intro": "We engineer fire suppression, detection and alarm systems to national and international standards, protecting people and assets in buildings and industrial facilities.",
+            "items": ["Fire suppression pipework", "Wet and dry fire suppression systems", "Automatic sprinkler systems", "Fire pump sets", "Fire detection systems", "Voice alarm and evacuation systems"],
         },
     },
     {
-        "key": "hvac", "icon": "climate", "img": "hvac",
+        "key": "hvac", "slug": {"tr": "hvac-iklimlendirme", "en": "hvac-air-conditioning"}, "detail": {"tr": "Isı kaybı-kazancı hesaplarından cihaz seçimine, VRF/VRV sistemlerinden kazan dairelerine ve yerden ısıtmaya kadar iklimlendirme sistemlerini enerji verimliliğini ön planda tutarak tasarlıyor ve devreye alıyoruz. Konut, otel, ofis, eğitim ve endüstriyel yapılarda konforu ve işletme maliyetini birlikte gözetiyoruz.", "en": "From heat load calculations and plant selection to VRF/VRV systems, boiler plant rooms and underfloor heating, we design and commission HVAC systems with energy efficiency built in. Across homes, hotels, offices, schools and industrial buildings, we strike the right balance between comfort and running costs."}, "icon": "climate", "img": "hvac",
         "tr": {
             "name": "HVAC ve İklimlendirme",
             "short": "Isıtma, soğutma, VRF/VRV klima sistemleri, kazan daireleri ve yerden ısıtma.",
@@ -60,13 +60,13 @@ SERVICES = [
         },
         "en": {
             "name": "HVAC & Air Conditioning",
-            "short": "Heating, cooling, VRF/VRV systems, boiler rooms and underfloor heating.",
-            "intro": "We design and install heating, cooling and air-conditioning systems that create ideal indoor conditions in living and working spaces.",
-            "items": ["Heating systems", "Cooling systems", "VRF/VRV air-conditioning", "Air-conditioning installations", "Boiler room systems", "Underfloor heating"],
+            "short": "Heating, cooling, VRF/VRV air conditioning, boiler plant rooms and underfloor heating.",
+            "intro": "We design and deliver heating, cooling and air conditioning systems that keep living and working spaces comfortable all year round.",
+            "items": ["Heating systems", "Cooling systems", "VRF/VRV air conditioning", "Air conditioning installation", "Boiler plant rooms", "Underfloor heating"],
         },
     },
     {
-        "key": "havalandirma", "icon": "fan", "img": "havalandirma",
+        "key": "havalandirma", "slug": {"tr": "havalandirma-sistemleri", "en": "ventilation-systems"}, "detail": {"tr": "Taze hava ihtiyacını, egzoz ve duman tahliye gereksinimlerini yapının kullanımına göre hesaplıyor; kanal tesisatını sessiz, verimli ve bakımı kolay olacak şekilde uyguluyoruz. Restoran mutfaklarından üretim tesislerine ve otoparklara kadar farklı alanlarda havalandırma çözümleri sunuyoruz.", "en": "We size fresh air, extract and smoke control requirements to suit each building's use, and install ductwork that is quiet, efficient and easy to maintain. Our ventilation work spans everything from commercial kitchens to production facilities and car parks."}, "icon": "fan", "img": "havalandirma",
         "tr": {
             "name": "Havalandırma Sistemleri",
             "short": "Mekanik havalandırma, kanal tesisatı, taze hava, egzoz ve duman tahliye sistemleri.",
@@ -75,13 +75,13 @@ SERVICES = [
         },
         "en": {
             "name": "Ventilation Systems",
-            "short": "Mechanical ventilation, ductwork, fresh air, exhaust and smoke extraction systems.",
-            "intro": "We design and install mechanical ventilation, fresh air, exhaust and smoke extraction systems for healthy air quality and comfort in enclosed spaces.",
-            "items": ["Mechanical ventilation systems", "Ventilation ductwork", "Fresh air systems", "Exhaust and smoke extraction systems"],
+            "short": "Mechanical ventilation, ductwork, fresh air supply, extract and smoke control systems.",
+            "intro": "We design and install mechanical ventilation, fresh air, extract and smoke control systems that deliver healthy indoor air and occupant comfort.",
+            "items": ["Mechanical ventilation systems", "Ductwork installation", "Fresh air supply systems", "Extract and smoke control systems"],
         },
     },
     {
-        "key": "proje", "icon": "blueprint", "img": "projelendirme",
+        "key": "proje", "slug": {"tr": "muhendislik-projelendirme", "en": "engineering-design"}, "detail": {"tr": "Mekanik projeleri, mimari ve diğer disiplinlerle koordineli şekilde hazırlıyor; kapasite ve ihtiyaç analizleriyle doğru sistem seçimini yapıyoruz. Kontrollük ve teknik danışmanlık hizmetlerimizle, uygulamanın projeye ve standartlara uygun ilerlemesini güvence altına alıyoruz.", "en": "We develop mechanical designs in close coordination with the architect and other disciplines, using load and capacity analysis to select the right systems. Through site supervision and technical consultancy, we make sure the installation follows the design and complies with the relevant standards."}, "icon": "blueprint", "img": "projelendirme",
         "tr": {
             "name": "Mühendislik ve Projelendirme",
             "short": "Mekanik projelendirme, revizyonlar, kapasite analizleri ve teknik danışmanlık.",
@@ -90,13 +90,13 @@ SERVICES = [
         },
         "en": {
             "name": "Engineering & Design",
-            "short": "Mechanical design, revisions, capacity analyses and technical consultancy.",
-            "intro": "We assess each project's technical needs and prepare, develop and manage mechanical designs in accordance with sound engineering principles.",
-            "items": ["Mechanical system design", "Mechanical design revisions", "Engineering and technical consultancy", "System capacity and demand analyses", "Project coordination and technical management"],
+            "short": "Mechanical services design, design revisions, load calculations and technical consultancy.",
+            "intro": "We assess each project's technical requirements and take the mechanical design from concept through to construction, grounded in sound engineering principles.",
+            "items": ["Mechanical services design", "Design revisions", "Engineering and technical consultancy", "Load and capacity calculations", "Project coordination and technical management"],
         },
     },
     {
-        "key": "taahhut", "icon": "key", "img": "taahhut",
+        "key": "taahhut", "slug": {"tr": "mekanik-taahhut-anahtar-teslim", "en": "contracting-turnkey"}, "detail": {"tr": "Anahtar teslim projelerde projelendirme, malzeme temini, montaj, test ve devreye alma süreçlerinin tamamını tek sözleşme ve tek muhatapla yönetiyoruz. Bu yaklaşım; koordinasyon kayıplarını azaltır, iş programına uyumu ve maliyet kontrolünü kolaylaştırır.", "en": "On turnkey projects, we deliver design, procurement, installation, testing and commissioning under a single contract and a single point of contact. Fewer interfaces mean fewer coordination gaps, and a project that stays on programme and on budget."}, "icon": "key", "img": "taahhut",
         "tr": {
             "name": "Mekanik Taahhüt ve Anahtar Teslim",
             "short": "Projelendirmeden malzeme temini ve montaja kadar anahtar teslim proje yönetimi.",
@@ -104,14 +104,14 @@ SERVICES = [
             "items": ["Mekanik tesisat taahhüt işleri", "Anahtar teslim mekanik tesisat projeleri", "Endüstriyel tesis uygulamaları", "Ticari ve konut projeleri", "Projelendirme, malzeme temini ve montaj süreçlerinin yönetimi"],
         },
         "en": {
-            "name": "Contracting & Turnkey Projects",
-            "short": "Turnkey project management from design through procurement and installation.",
-            "intro": "From small to large-scale projects, we manage mechanical works from design to completion and deliver contracting and turnkey solutions.",
-            "items": ["Mechanical contracting works", "Turnkey mechanical installation projects", "Industrial facility applications", "Commercial and residential projects", "Management of design, procurement and installation"],
+            "name": "Mechanical Contracting & Turnkey",
+            "short": "Complete mechanical packages, from design and procurement through to installation.",
+            "intro": "On projects large and small, we take mechanical works from design through to completion, either as mechanical contractor or on a fully turnkey basis.",
+            "items": ["Mechanical contracting", "Turnkey mechanical packages", "Industrial installations", "Commercial and residential projects", "Design, procurement and installation management"],
         },
     },
     {
-        "key": "elektrik", "icon": "bolt", "img": "elektrik",
+        "key": "elektrik", "slug": {"tr": "elektrik-otomasyon", "en": "electrical-automation"}, "detail": {"tr": "Mekanik sistemlerin verimli ve güvenli çalışması için gerekli elektrik tesisatı ve otomasyon altyapısını, alanında uzman çözüm ortaklarımızla birlikte projelendiriyor ve uyguluyoruz. Böylece mekanik ve elektrik işleri tek koordinasyon altında, uyumlu biçimde ilerler.", "en": "Together with our specialist partners, we design and install the power and controls infrastructure that mechanical systems need to run safely and efficiently, keeping mechanical and electrical works aligned under one coordinated programme."}, "icon": "bolt", "img": "elektrik",
         "tr": {
             "name": "Elektrik ve Otomasyon",
             "short": "Mekanik sistemlerle entegre elektrik tesisatı ve otomasyon çözümleri.",
@@ -119,10 +119,10 @@ SERVICES = [
             "items": ["Elektrik tesisatı uygulamaları", "Elektrik proje ve uygulama koordinasyonu", "Mekanik sistem otomasyonu", "Çözüm ortaklarımız aracılığıyla elektrik ve otomasyon işleri"],
         },
         "en": {
-            "name": "Electrical & Automation",
-            "short": "Electrical installation and automation integrated with mechanical systems.",
-            "intro": "Through our expert solution partners, we provide comprehensive electrical and automation solutions that work hand in hand with mechanical systems.",
-            "items": ["Electrical installation works", "Electrical design and site coordination", "Mechanical system automation", "Electrical and automation works via solution partners"],
+            "name": "Electrical & Controls",
+            "short": "Electrical installation and building controls, fully integrated with mechanical systems.",
+            "intro": "Working with specialist partners, we deliver the electrical and controls packages that mechanical systems depend on.",
+            "items": ["Electrical installation", "Electrical design and site coordination", "Controls and automation for mechanical systems", "Electrical and controls works through specialist partners"],
         },
     },
 ]
@@ -132,37 +132,37 @@ SERVICES = [
 WORK = {
     "isitma_sogutma": ("Isıtma soğutma sistemi kurulumu", "Heating and cooling system installation", ["hvac"]),
     "isitma_sogutma_tes": ("Isıtma soğutma tesisatı", "Heating and cooling installation", ["hvac"]),
-    "yangin": ("Yangın tesisatı işleri", "Fire protection installation", ["yangin"]),
-    "sulu_yangin": ("Siyah boru ile sulu yangın tesisatı", "Wet fire protection piping (black steel)", ["yangin"]),
-    "sulu_yangin2": ("Sulu yangın tesisatı işleri", "Wet fire protection installation", ["yangin"]),
-    "kuru_yangin": ("Kuru tip yangın tesisatı", "Dry-type fire protection system", ["yangin"]),
+    "yangin": ("Yangın tesisatı işleri", "Fire suppression installation", ["yangin"]),
+    "sulu_yangin": ("Siyah boru ile sulu yangın tesisatı", "Wet fire suppression pipework (black steel)", ["yangin"]),
+    "sulu_yangin2": ("Sulu yangın tesisatı işleri", "Wet fire suppression installation", ["yangin"]),
+    "kuru_yangin": ("Kuru tip yangın tesisatı", "Dry fire suppression system", ["yangin"]),
     "sprinkler": ("Sprinkler tesisatı işleri", "Sprinkler system installation", ["yangin"]),
     "algilama": ("Yangın algılama ve sesli anons tesisatı", "Fire detection and voice alarm system", ["yangin", "elektrik"]),
-    "havalandirma": ("Havalandırma tesisatı işleri", "Ventilation installation", ["havalandirma"]),
+    "havalandirma": ("Havalandırma tesisatı işleri", "Ventilation and ductwork", ["havalandirma"]),
     "vrf": ("VRF tesisatı işleri", "VRF system installation", ["hvac"]),
     "teknolojik_su": ("Teknolojik su sistemleri", "Process water systems", ["mekanik"]),
     "sihhi": ("Sıhhi tesisat işleri", "Plumbing works", ["mekanik"]),
-    "sihhi_pprc": ("PPRC ve PVC boru ile sıhhi tesisat", "Plumbing with PP-R and PVC piping", ["mekanik"]),
+    "sihhi_pprc": ("PPRC ve PVC boru ile sıhhi tesisat", "Plumbing in PP-R and PVC pipework", ["mekanik"]),
     "dogalgaz": ("Doğalgaz tesisatı işleri", "Natural gas installation", ["mekanik"]),
     "mekanik_proje": ("Mekanik proje hizmeti", "Mechanical design services", ["proje"]),
     "em_proje": ("Elektrik-mekanik proje hizmeti", "Electrical and mechanical design services", ["proje", "elektrik"]),
     "elektrik": ("Elektrik işleri", "Electrical works", ["elektrik"]),
     "anahtar_klinik": ("Anahtar teslim diş kliniği yapımı", "Turnkey dental clinic construction", ["taahhut"]),
     "anahtar_tesis": ("Anahtar teslim tesis yapımı", "Turnkey facility construction", ["taahhut"]),
-    "kontrolluk": ("Mekanik tesisat kontrollük ve danışmanlık hizmeti", "Mechanical works supervision and consultancy", ["proje"]),
-    "ges_fizibilite": ("Kapasite tayini, fizibilite raporları ve çağrı mektubu süreci", "Capacity sizing, feasibility reports and grid application", ["proje"]),
+    "kontrolluk": ("Mekanik tesisat kontrollük ve danışmanlık hizmeti", "Mechanical site supervision and consultancy", ["proje"]),
+    "ges_fizibilite": ("Kapasite tayini, fizibilite raporları ve çağrı mektubu süreci", "Capacity sizing, feasibility studies and grid connection application", ["proje"]),
     "ges_ihale": ("İhale ve proje yönetim süreçlerinin planlanması", "Tender and project management planning", ["proje"]),
-    "sosyal_tesis": ("Sosyal tesis mekanik tesisat işleri", "Mechanical works for the social facility", ["mekanik", "taahhut"]),
+    "sosyal_tesis": ("Sosyal tesis mekanik tesisat işleri", "Mechanical works for the clubhouse and amenities", ["mekanik", "taahhut"]),
     "mek_revizyon": ("Mekanik tesisat revizyon işleri", "Mechanical system retrofit", ["mekanik"]),
     "elk_revizyon": ("Elektrik tesisatı revizyon işleri", "Electrical system retrofit", ["elektrik"]),
     "insai": ("İnşai işler", "Construction works", ["taahhut"]),
-    "kazan": ("Kazan dairesi kurulumu", "Boiler room installation", ["hvac"]),
+    "kazan": ("Kazan dairesi kurulumu", "Boiler plant room installation", ["hvac"]),
     "lng": ("LNG tank soğutma sistemleri", "LNG tank cooling systems", ["mekanik"]),
-    "klima_yerden": ("Klima, yerden ısıtma, soğutma ve havalandırma tesisatları", "Air-conditioning, underfloor heating, cooling and ventilation", ["hvac", "havalandirma"]),
-    "klima_isitma": ("Klima, ısıtma, soğutma ve havalandırma tesisatları", "Air-conditioning, heating, cooling and ventilation", ["hvac", "havalandirma"]),
+    "klima_yerden": ("Klima, yerden ısıtma, soğutma ve havalandırma tesisatları", "Air conditioning, underfloor heating, cooling and ventilation", ["hvac", "havalandirma"]),
+    "klima_isitma": ("Klima, ısıtma, soğutma ve havalandırma tesisatları", "Air conditioning, heating, cooling and ventilation", ["hvac", "havalandirma"]),
     "yangin_sprinkler": ("Yangın ve sprinkler tesisatları", "Fire protection and sprinkler systems", ["yangin"]),
-    "pis_temiz": ("Pis su ve temiz su tesisatları", "Waste and clean water systems", ["mekanik"]),
-    "otomasyon": ("Otomasyon işleri", "Automation works", ["elektrik"]),
+    "pis_temiz": ("Pis su ve temiz su tesisatları", "Domestic water and drainage", ["mekanik"]),
+    "otomasyon": ("Otomasyon işleri", "Controls and automation", ["elektrik"]),
 }
 
 # ---------------------------------------------------------------- Referanslar (Excel listesi, 2012–2026)
@@ -203,7 +203,10 @@ REFERENCES = [
     ("sisecam-bilim", "photo", "ofis", "Şişecam A.Ş.", "Bilim ve Teknoloji Merkezi", "Science and Technology Centre", ["klima_isitma", "yangin_sprinkler", "pis_temiz", "otomasyon"], 30000, "Kocaeli - Gebze", "2012–2013", "2012–2013"),
 ]
 
-FEATURED = ["sisecam-bilim", "sisecam-pasabahce", "atiye-residence", "teknik-conta-silivri", "zekeriyakoy-villa", "kiler-referans", "mene-biopark", "licus-otel"]
+FEATURED = ["robert-koleji", "sisecam-bilim", "sisecam-pasabahce", "ozyegin", "teknik-conta-silivri", "kiler-referans", "mene-biopark", "yapi-merkezi"]
+
+# Ana sayfadaki "referans listemizden" bölümü
+HOME_REFS = ["arcelik-ersan", "hanwha", "airties-ofis", "bilfen", "lua-dent", "gosb-camii"]
 
 CATEGORIES = {
     "konut": ("Konut & Villa", "Residential & Villas", "home"),
@@ -212,9 +215,9 @@ CATEGORIES = {
     "egitim": ("Eğitim & Spor", "Education & Sports", "school"),
     "saglik": ("Sağlık", "Healthcare", "health"),
     "otel": ("Otel & Turizm", "Hotels & Hospitality", "hotel"),
-    "ofis": ("Ofis & İdari Bina", "Offices & Admin", "office"),
+    "ofis": ("Ofis & İdari Bina", "Offices & Administrative", "office"),
     "enerji": ("Enerji", "Energy", "sun"),
-    "dini": ("Kamu & Dini Yapı", "Public & Religious", "dome"),
+    "dini": ("Kamu & Dini Yapı", "Public & Religious Buildings", "dome"),
 }
 
 CLIENT_STRIP = ["Robert Koleji", "Özyeğin Üniversitesi", "Şişecam", "Arçelik", "Hanwha Aerospace", "Airties", "Yapı Merkezi", "Bilfen", "Kiler GYO", "Mene Health", "Biltur", "GOSB", "Eser İnşaat", "Habif Mimarlık"]
