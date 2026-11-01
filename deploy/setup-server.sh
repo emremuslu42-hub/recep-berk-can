@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# BSM Mekanik — VDS kurulum betiği (Ubuntu / Debian, nginx)
+# BSM Mekanik — VDS kurulum betiği (Ubuntu / Debian)
+# Sunucuda Caddy çalışıyorsa Caddy'ye eklenir (diğer sitelere dokunulmaz); yoksa nginx + certbot kurulur.
 #
 # Kullanım (sunucuda root olarak):
 #   Repo herkese açıksa:
@@ -7,7 +8,7 @@
 #   Repo gizliyse: GitHub'da bu dosyayı açıp "Raw" düğmesinin verdiği (token'lı) adresi curl ile indirin.
 #   Gizli repoda betik bir deploy key (yalnızca okuma) üretir ve GitHub'a eklemenizi ister.
 #
-#   bash setup-server.sh demo      # yalnızca bsmmekanik.mesakyazilim.com
+#   bash setup-server.sh demo      # yalnızca bsmmekanik.nesakyazilim.com
 #   bash setup-server.sh domains   # alan adları sunucuya yönlendikten sonra: www/çıplak bsmmekanik.com + bsmmechanical.com
 #
 # Betik tekrar çalıştırılabilir; her seferinde siteyi günceller, ayarları yeniden yazar.
@@ -22,7 +23,7 @@ BRANCH="claude/bold-edison-kwvvmm"
 APP_DIR="/opt/bsmmekanik"
 WEB_ROOT="/var/www/bsmmekanik"
 SITE_CONF="/etc/nginx/sites-available/bsmmekanik"
-DEMO_HOST="bsmmekanik.mesakyazilim.com"
+DEMO_HOST="bsmmekanik.nesakyazilim.com"
 DOMAIN_HOSTS="www.bsmmekanik.com bsmmekanik.com www.bsmmechanical.com bsmmechanical.com"
 CERT_EMAIL="${CERT_EMAIL:-mert@bsmmechanical.com}"
 
@@ -33,18 +34,31 @@ die() { printf '\n\033[1;31mHATA: %s\033[0m\n' "$*" >&2; exit 1; }
 [ "$MODE" = "demo" ] || [ "$MODE" = "domains" ] || die "kullanım: bash setup-server.sh demo|domains"
 command -v apt-get >/dev/null || die "Bu betik Ubuntu/Debian içindir."
 
-# 80 numaralı portu nginx dışında bir şey (Apache, panel vb.) kullanıyorsa dur
-if command -v ss >/dev/null; then
-  busy=$(ss -ltnp 2>/dev/null | awk '$4 ~ /:80$/' | grep -v nginx || true)
-  [ -z "$busy" ] || die "80 portu başka bir yazılım tarafından kullanılıyor:
-$busy
-Sunucuda Apache/panel varsa deploy/.htaccess dosyasını kullanın ya da bana yazın."
+# 80 portunu kim kullanıyor? Caddy → Caddy'ye ekle · boş/nginx → nginx · başka → dur
+SERVER="nginx"
+port80=$(ss -ltnp 2>/dev/null | awk '$4 ~ /:80$/' || true)
+if echo "$port80" | grep -q '"caddy"'; then
+  SERVER="caddy"
+  CADDYFILE="/etc/caddy/Caddyfile"
+  [ -f "$CADDYFILE" ] && systemctl is-active -q caddy \
+    || die "Caddy çalışıyor ama systemd hizmeti / $CADDYFILE bulunamadı (Docker, Coolify vb. olabilir). Bana yazın."
+elif echo "$port80" | grep -q 'docker-proxy'; then
+  die "80 portu bir Docker konteynerinde (Coolify, Dokploy, Traefik vb.). Hangi paneli kullandığınızı bana yazın."
+elif [ -n "$port80" ] && ! echo "$port80" | grep -q nginx; then
+  die "80 portu başka bir yazılım tarafından kullanılıyor:
+$port80
+Apache varsa deploy/.htaccess dosyasını kullanın ya da bana yazın."
 fi
+say "Web sunucusu: $SERVER"
 
-say "Paketler kuruluyor (nginx, certbot, git)"
+say "Paketler kuruluyor"
 export DEBIAN_FRONTEND=noninteractive
 apt-get update -qq
-apt-get install -y -qq nginx certbot python3-certbot-nginx git curl dnsutils >/dev/null
+if [ "$SERVER" = "nginx" ]; then
+  apt-get install -y -qq nginx certbot python3-certbot-nginx git curl dnsutils >/dev/null
+else
+  apt-get install -y -qq git curl dnsutils >/dev/null
+fi
 
 say "Site dosyaları GitHub'dan alınıyor"
 if [ -d "$APP_DIR/.git" ]; then
@@ -78,6 +92,32 @@ if [ -e "$WEB_ROOT" ] && [ ! -L "$WEB_ROOT" ]; then
 fi
 ln -sfn "$APP_DIR/public" "$WEB_ROOT"
 
+if [ "$SERVER" = "caddy" ]; then
+  say "Caddy ayarı ekleniyor"
+  cp -n "$CADDYFILE" "$CADDYFILE.yedek-bsm" 2>/dev/null || true
+  grep -q "import $APP_DIR/deploy/bsmmekanik.caddy" "$CADDYFILE" \
+    || printf '\n# BSM Mekanik\nimport %s/deploy/bsmmekanik.caddy\n' "$APP_DIR" >> "$CADDYFILE"
+  DOMAINS_CADDY="/etc/caddy/bsmmekanik-domains.caddy"
+  if [ "$MODE" = "domains" ]; then
+    cat > "$DOMAINS_CADDY" <<'EOC'
+www.bsmmekanik.com, www.bsmmechanical.com {
+	import bsm_site
+}
+bsmmekanik.com {
+	redir https://www.bsmmekanik.com{uri} permanent
+}
+bsmmechanical.com {
+	redir https://www.bsmmechanical.com{uri} permanent
+}
+EOC
+    grep -q "import $DOMAINS_CADDY" "$CADDYFILE" || printf 'import %s\n' "$DOMAINS_CADDY" >> "$CADDYFILE"
+  fi
+  caddy validate --config "$CADDYFILE" --adapter caddyfile >/dev/null 2>&1 \
+    || { caddy validate --config "$CADDYFILE" --adapter caddyfile; die "Caddy ayarı geçersiz; yedek: $CADDYFILE.yedek-bsm"; }
+  systemctl reload caddy
+fi
+
+if [ "$SERVER" = "nginx" ]; then
 say "nginx ayarı yazılıyor"
 cp "$APP_DIR/deploy/nginx.conf" "$SITE_CONF"
 # IPv6 kapalı sunucularda [::] dinleme satırı nginx'i durdurur
@@ -88,9 +128,11 @@ nginx -t
 systemctl enable -q nginx
 systemctl reload nginx || systemctl restart nginx
 
+fi
+
 if command -v ufw >/dev/null && ufw status | grep -q "Status: active"; then
   say "Güvenlik duvarında 80/443 açılıyor"
-  ufw allow 'Nginx Full' >/dev/null
+  ufw allow 80/tcp >/dev/null && ufw allow 443/tcp >/dev/null
 fi
 
 say "Otomatik güncelleme (5 dakikada bir GitHub'dan çeker)"
@@ -102,10 +144,13 @@ git fetch -q --depth 1 origin "$BRANCH"
 if [ "\$(git rev-parse HEAD)" != "\$(git rev-parse "origin/$BRANCH")" ]; then
   git reset -q --hard "origin/$BRANCH"
   chmod -R a+rX public
-  if ! cmp -s deploy/nginx.conf "$SITE_CONF"; then
+  if [ -f "$SITE_CONF" ] && ! cmp -s deploy/nginx.conf "$SITE_CONF"; then
     cp deploy/nginx.conf "$SITE_CONF.new"
     # certbot'un eklediği SSL satırlarını korumak için ayar dosyası otomatik değiştirilmez
     echo "nginx.conf değişti; inceleyip elle güncelleyin: $SITE_CONF.new" | logger -t bsmmekanik
+  fi
+  if systemctl is-active -q caddy && grep -q bsmmekanik.caddy /etc/caddy/Caddyfile 2>/dev/null; then
+    caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile >/dev/null 2>&1 && systemctl reload caddy
   fi
   logger -t bsmmekanik "site güncellendi: \$(git rev-parse --short HEAD)"
 fi
@@ -129,7 +174,9 @@ for h in $HOSTS; do
   fi
 done
 
-if [ ${#ready[@]} -gt 0 ]; then
+if [ "$SERVER" = "caddy" ]; then
+  [ ${#ready[@]} -gt 0 ] && echo "SSL sertifikalarını Caddy otomatik alır (ilk açılışta birkaç saniye sürebilir)."
+elif [ ${#ready[@]} -gt 0 ]; then
   say "SSL sertifikası alınıyor (Let's Encrypt)"
   certbot --nginx --non-interactive --agree-tos --redirect --expand -m "$CERT_EMAIL" "${ready[@]}"
   systemctl reload nginx

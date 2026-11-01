@@ -91,7 +91,7 @@ WhatsApp düğmesi Mert'in cep numarasına bağlıdır (`content.py` → `whatsa
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/emremuslu42-hub/recep-berk-can/claude/bold-edison-kwvvmm/deploy/setup-server.sh -o setup-server.sh
-bash setup-server.sh demo      # bsmmekanik.mesakyazilim.com
+bash setup-server.sh demo      # bsmmekanik.nesakyazilim.com
 bash setup-server.sh domains   # alan adları sunucuyu gösterdikten sonra
 ```
 
