@@ -13,8 +13,8 @@ COMPANY = {
         {"name": "Berk", "email": "berk@bsmmechanical.com", "phone": "+90 553 930 67 89", "tel": "+905539306789"},
     ],
     "whatsapp": "905468258035",
-    "domain_tr": "https://bsmmekanik.com",
-    "domain_en": "https://bsmmechanical.com",
+    "domain_tr": "https://www.bsmmekanik.com",
+    "domain_en": "https://www.bsmmechanical.com",
     "map_query": "Altıntepe Mah. İstasyon Yolu Sok. No:3 Maltepe İstanbul",
 }
 

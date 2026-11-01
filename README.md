@@ -3,8 +3,9 @@
 BSM Mekanik Mühendislik İnşaat San. ve Tic. Ltd. Şti. için iki dilli (TR/EN) statik kurumsal site.
 Cloudflare Workers (statik asset) üzerinde yayınlanır; derleme sunucusu gerektirmez.
 
-- Türkçe: `https://bsmmekanik.com/` (kök) — canonical
-- İngilizce: `https://bsmmechanical.com/en/` — canonical
+- Türkçe: `https://www.bsmmekanik.com/` (kök) — canonical
+- İngilizce: `https://www.bsmmechanical.com/en/` — canonical
+- Çıplak alan adları (`bsmmekanik.com`, `bsmmechanical.com`) `www` adresine yönlenir.
 - İki alan adı da sitenin tamamını açar; dil seçimi sağ üstteki TR/EN düğmesiyle yapılır.
 
 ## Klasör yapısı
@@ -59,8 +60,8 @@ python3 -m http.server 8000 -d public
 - Başlıklar nokta ile bitmez (build sırasında otomatik temizlenir)
 
 Alan adları bağlandıktan sonra yapılacaklar:
-1. Google Search Console'a iki alan adını da ekleyin (doğrulama TXT kaydı Cloudflare DNS'e), `https://bsmmekanik.com/sitemap.xml` gönderin.
-2. Google İşletme Profili (Google Maps kaydı) açın; adres/telefon sitedekiyle birebir aynı olsun, web sitesi olarak bsmmekanik.com yazın.
+1. Google Search Console'a iki alan adını da ekleyin (doğrulama TXT kaydı Cloudflare DNS'e), `https://www.bsmmekanik.com/sitemap.xml` gönderin.
+2. Google İşletme Profili (Google Maps kaydı) açın; adres/telefon sitedekiyle birebir aynı olsun, web sitesi olarak www.bsmmekanik.com yazın.
 3. Cloudflare panelinden Web Analytics'i açın (çerezsiz ziyaretçi istatistiği).
 
 ## Görseller
