@@ -62,11 +62,10 @@ $CaddyExe = $proc.ExecutablePath
 Write-Host "   caddy.exe : $CaddyExe"
 Write-Host "   komut     : $($proc.CommandLine)"
 
-$svc = Get-CimInstance Win32_Service | Where-Object { $_.ProcessId -eq $proc.ProcessId -or $_.PathName -like '*caddy*' } | Select-Object -First 1
-if (-not $svc) {
-    # NSSM gibi sarmalayıcılar: üst süreç hizmet olabilir
-    $svc = Get-CimInstance Win32_Service | Where-Object { $_.ProcessId -eq $proc.ParentProcessId } | Select-Object -First 1
-}
+# Yalnızca Caddy'ye ait bir Windows hizmeti dikkate alınır (Görev Zamanlayıcı ile başlatılan Caddy'de hizmet yoktur)
+$svc = Get-CimInstance Win32_Service | Where-Object {
+    $_.PathName -like '*caddy*' -or ($_.ProcessId -eq $proc.ProcessId -and $_.ProcessId -ne 0)
+} | Select-Object -First 1
 if ($svc) { Write-Host "   hizmet    : $($svc.Name)" }
 
 if (-not $Caddyfile) {
