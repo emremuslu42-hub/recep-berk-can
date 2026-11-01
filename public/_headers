@@ -18,3 +18,9 @@
 
 /assets/video/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+https://bsm-mekanik.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.bsm-mekanik.pages.dev/*
+  X-Robots-Tag: noindex
