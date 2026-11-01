@@ -5,7 +5,7 @@
 #   powershell -ExecutionPolicy Bypass -File .\setup-windows.ps1 -Mode domains # alan adları sunucuya yönlendikten sonra
 #   Caddyfile otomatik bulunamazsa:  ... -Caddyfile "C:\caddy\Caddyfile"
 #
-# Yaptıkları: Git'i kurar (yoksa), GitHub için okuma anahtarı (deploy key) üretir, siteyi C:\bsmmekanik'e çeker,
+# Yaptıkları: Git'i kurar (yoksa), repo gizliyse GitHub okuma anahtarı (deploy key) üretir, siteyi C:\bsmmekanik'e çeker,
 # Caddyfile'a tek bir import satırı ekler (önce yedek alır, doğrulamadan yeniden yüklemez) ve 5 dakikada bir
 # GitHub'dan güncelleyen zamanlanmış görev kurar. Tekrar çalıştırılabilir.
 
@@ -19,6 +19,7 @@ $AppDir   = 'C:\bsmmekanik'
 $KeyDir   = 'C:\bsmmekanik-key'
 $Key      = 'C:/bsmmekanik-key/id_ed25519'
 $Repo     = 'git@github.com:emremuslu42-hub/recep-berk-can.git'
+$RepoHttps = 'https://github.com/emremuslu42-hub/recep-berk-can.git'
 $Branch   = 'claude/bold-edison-kwvvmm'
 $Import   = 'import C:/bsmmekanik/deploy/bsmmekanik-windows.caddy'
 $DomainsFile   = 'C:\bsmmekanik-key\domains.caddy'
@@ -111,26 +112,34 @@ $SshKeygen = Join-Path $GitRoot 'usr\bin\ssh-keygen.exe'
 if (-not (Test-Path $SshKeygen)) { $SshKeygen = 'ssh-keygen' }
 Write-Host "   git : $GitExe"
 
-# --- Okuma anahtarı (deploy key)
-if (-not (Test-Path $KeyDir)) { New-Item -ItemType Directory -Path $KeyDir | Out-Null }
-icacls $KeyDir /inheritance:r /grant:r 'Administrators:(OI)(CI)F' 'SYSTEM:(OI)(CI)F' | Out-Null
-if (-not (Test-Path "$KeyDir\id_ed25519")) {
-    Say 'GitHub okuma anahtarı oluşturuluyor'
-    $null = Exec $SshKeygen "-q -t ed25519 -N `"`" -C bsmmekanik-vds -f `"$KeyDir\id_ed25519`""
-    if (-not (Test-Path "$KeyDir\id_ed25519.pub")) { Die 'Anahtar oluşturulamadı.' }
-}
-$env:GIT_SSH_COMMAND = $SshCmd
-
+# --- Repo erişimi: herkese açıksa HTTPS, gizliyse okuma anahtarı (deploy key)
+$env:GIT_TERMINAL_PROMPT = '0'
+$UseSsh = $false
 Say 'GitHub erişimi kontrol ediliyor'
-while ((Exec $GitExe "ls-remote -q $Repo" -Quiet) -ne 0) {
-    Warn "`nSunucunun repoyu okuyabilmesi için bu anahtarı GitHub'a ekleyin:"
-    Write-Host '  https://github.com/emremuslu42-hub/recep-berk-can/settings/keys  ->  Add deploy key'
-    Write-Host '  Title: bsmmekanik-vds   -   "Allow write access" İŞARETLEMEYİN'
-    Write-Host ''
-    Write-Host (Get-Content "$KeyDir\id_ed25519.pub") -ForegroundColor Green
-    Write-Host ''
-    Read-Host 'Ekledikten sonra Enter''a basın (çıkmak için Ctrl+C)' | Out-Null
+if ((Exec $GitExe "ls-remote -q $RepoHttps" -Quiet) -eq 0) {
+    Write-Host '   repo herkese açık, HTTPS ile çekilecek'
+    $Repo = $RepoHttps
+} else {
+    $UseSsh = $true
+    if (-not (Test-Path $KeyDir)) { New-Item -ItemType Directory -Path $KeyDir | Out-Null }
+    icacls $KeyDir /inheritance:r /grant:r 'Administrators:(OI)(CI)F' 'SYSTEM:(OI)(CI)F' | Out-Null
+    if (-not (Test-Path "$KeyDir\id_ed25519")) {
+        Say 'GitHub okuma anahtarı oluşturuluyor'
+        $null = Exec $SshKeygen "-q -t ed25519 -N `"`" -C bsmmekanik-vds -f `"$KeyDir\id_ed25519`""
+        if (-not (Test-Path "$KeyDir\id_ed25519.pub")) { Die 'Anahtar oluşturulamadı.' }
+    }
+    $env:GIT_SSH_COMMAND = $SshCmd
+    while ((Exec $GitExe "ls-remote -q $Repo" -Quiet) -ne 0) {
+        Warn "`nRepo gizli. Sunucunun okuyabilmesi için bu anahtarı GitHub'a ekleyin:"
+        Write-Host '  https://github.com/emremuslu42-hub/recep-berk-can/settings/keys  ->  Add deploy key'
+        Write-Host '  Title: bsmmekanik-vds   -   "Allow write access" İŞARETLEMEYİN'
+        Write-Host ''
+        Write-Host (Get-Content "$KeyDir\id_ed25519.pub") -ForegroundColor Green
+        Write-Host ''
+        Read-Host 'Ekledikten sonra Enter''a basın (çıkmak için Ctrl+C)' | Out-Null
+    }
 }
+if (-not (Test-Path $KeyDir)) { New-Item -ItemType Directory -Path $KeyDir | Out-Null }
 Write-Host '   erişim tamam'
 
 # --- Site dosyaları
@@ -143,7 +152,7 @@ if (Test-Path "$AppDir\.git") {
     if (Test-Path $AppDir) { Rename-Item $AppDir "$AppDir.yedek-$(Get-Date -Format yyyyMMddHHmmss)" }
     if ((Exec $GitExe "clone -q --depth 1 --branch $Branch $Repo `"$AppDir`"") -ne 0) { Die 'git clone başarısız.' }
 }
-$null = Exec $GitExe "$safe -C `"$AppDir`" config core.sshCommand `"$SshCmd`""
+if ($UseSsh) { $null = Exec $GitExe "$safe -C `"$AppDir`" config core.sshCommand `"$SshCmd`"" }
 if (-not (Test-Path "$AppDir\deploy\bsmmekanik-windows.caddy")) { Die 'Depoda deploy\bsmmekanik-windows.caddy bulunamadı.' }
 
 # --- Caddy ayarı
@@ -192,7 +201,7 @@ if ((Exec $CaddyExe "reload $cfgArgs") -ne 0) {
 Say 'Otomatik güncelleme görevi (5 dakikada bir)'
 $update = @'
 $ErrorActionPreference = 'Continue'
-$env:GIT_SSH_COMMAND = '__SSH__'
+if ('__SSH__') { $env:GIT_SSH_COMMAND = '__SSH__' }
 $git = '__GIT__'; $app = 'C:\bsmmekanik'; $log = 'C:\bsmmekanik-key\update.log'
 $before = & $git -c safe.directory=* -C $app rev-parse HEAD
 & $git -c safe.directory=* -C $app fetch -q --depth 1 origin __BRANCH__ 2>&1 | Out-Null
@@ -203,7 +212,8 @@ if ($after -and $before -ne $after) {
     Add-Content $log "$(Get-Date -Format s) güncellendi: $after"
 }
 '@
-$update = $update.Replace('__SSH__', $SshCmd).Replace('__GIT__', $GitExe).Replace('__BRANCH__', $Branch).Replace('__CADDY__', $CaddyExe).Replace('__CADDYFILE__', $Caddyfile)
+$sshForUpdate = if ($UseSsh) { $SshCmd } else { '' }
+$update = $update.Replace('__SSH__', $sshForUpdate).Replace('__GIT__', $GitExe).Replace('__BRANCH__', $Branch).Replace('__CADDY__', $CaddyExe).Replace('__CADDYFILE__', $Caddyfile)
 [IO.File]::WriteAllText("$KeyDir\update.ps1", $update, (New-Object System.Text.UTF8Encoding $true))
 schtasks /Create /TN 'BSM Mekanik Guncelleme' /SC MINUTE /MO 5 /RU SYSTEM /RL HIGHEST /F `
     /TR "powershell -NoProfile -ExecutionPolicy Bypass -File $KeyDir\update.ps1" | Out-Null
