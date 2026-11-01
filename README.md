@@ -85,9 +85,18 @@ WhatsApp düğmesi Mert'in cep numarasına bağlıdır (`content.py` → `whatsa
 ## Kendi sunucunda (VDS) yayın
 
 `deploy/` klasörü:
-- `setup-server.sh` — Ubuntu/Debian için tek komutla kurulum: nginx, SSL (Let's Encrypt), siteyi GitHub'dan çekme ve 5 dakikada bir otomatik güncelleme.
+- `setup-server.sh` — Ubuntu/Debian için tek komutla kurulum (Caddy varsa ona eklenir, yoksa nginx + Let's Encrypt), siteyi GitHub'dan çekme ve 5 dakikada bir otomatik güncelleme.
+- `setup-windows.ps1` — Windows sunucuda çalışan Caddy için aynı kurulum (Git, deploy key, Caddyfile import, Görev Zamanlayıcı ile güncelleme).
+- `bsmmekanik.caddy` / `bsmmekanik-windows.caddy` — Caddy site ayarı (Linux / Windows yolları).
 - `nginx.conf` — temiz URL'ler, 404, www yönlendirmesi, önbellek, demo adresinde `noindex`.
 - `.htaccess` — Apache kullanılan sunucular için aynı kurallar.
+
+Windows (Yönetici PowerShell):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\setup-windows.ps1              # demo
+powershell -ExecutionPolicy Bypass -File .\setup-windows.ps1 -Mode domains # alan adları yönlendikten sonra
+```
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/emremuslu42-hub/recep-berk-can/claude/bold-edison-kwvvmm/deploy/setup-server.sh -o setup-server.sh
