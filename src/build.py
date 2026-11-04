@@ -142,6 +142,25 @@ UI = {
 }
 
 
+def lower_tr(text):
+    """Türkçe küçük harf (İ→i, I→ı); HVAC gibi kısaltmalar korunur."""
+    words = []
+    for w in text.split(" "):
+        if w.isupper() and len(w) > 1:
+            words.append(w)
+        else:
+            words.append(w.replace("İ", "i").replace("I", "ı").lower())
+    return " ".join(words)
+
+
+def cap_tr(text):
+    """Cümlenin ilk harfini Türkçe kurala göre büyütür (i→İ)."""
+    if not text:
+        return text
+    first = "İ" if text[0] == "i" else text[0].upper()
+    return first + text[1:]
+
+
 def fmt_num(n, lang):
     s = f"{n:,}"
     return s.replace(",", ".") if lang == "tr" else s
@@ -611,7 +630,7 @@ def home(lang):
       <h2 class="h-lg">{t["about_h"]}</h2>
       <p class="lead">{about_paras[0]}</p>
       {about_more}
-      <p style="margin-top:32px"><a class="btn btn--outline" href="{path("about", lang)}">{u["nav"]["about"]} {I["arrow"]}</a></p>
+      <p style="margin-top:32px"><a class="btn btn--outline" href="{path("about", lang)}">{u["detail"]} {I["arrow"]}</a></p>
     </div>
   </div>
 </section>
@@ -848,8 +867,11 @@ def service_page(s, lang):
     paths = {l: path(None, l, s) for l in LANGS}
     crumbs = [(u["nav"]["home"], path("home", lang)), (u["nav"]["services"], path("services", lang)), (x["name"], paths[lang])]
     rel = sorted((r for r in REFS if s["key"] in r["tags"]), key=lambda r: r["imgtype"] == "stock")
-    examples = ", ".join(rname(r, lang) for r in rel[:3])
-    faqs = [(q.format(name=x["name"], name_l=x["name"].lower()), a.format(examples=examples)) for q, a in t["faqs"]]
+    ex = [rname(r, lang) for r in rel[:3]]
+    joiner = " ve " if lang == "tr" else " and "
+    examples = (", ".join(ex[:-1]) + joiner + ex[-1]) if len(ex) > 1 else "".join(ex)
+    faqs = [(cap_tr(q.format(name=lower_tr(x["name"]) if lang == "tr" else x["name"], name_l=x["name"].lower())), a.format(examples=examples))
+            for q, a in t["faqs"]]
     items = "".join(f"<li>{I['check_sm']}{it}</li>" for it in x["items"])
     mini = "".join(
         f'<div class="mini-ref">{thumb(r["src"]).replace(' alt=""', ' alt="' + escape(rname(r, lang)) + '" loading="lazy"')}<div><strong>{escape(rname(r, lang))}</strong>'
