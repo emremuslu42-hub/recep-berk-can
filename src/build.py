@@ -485,10 +485,10 @@ def process_section(lang):
 HOME = {
     "tr": {
         "title": "BSM Mekanik | İstanbul Mekanik Tesisat, Yangın, HVAC ve Havalandırma",
-        "desc": "Robert Koleji, Özyeğin Üniversitesi, Arçelik ve Hanwha Aerospace referanslı BSM Mekanik; İstanbul’da mekanik tesisat, yangın söndürme, HVAC ve havalandırma.",
+        "desc": "Özyeğin Üniversitesi, Arçelik, Hanwha Aerospace ve Airties referanslı BSM Mekanik; İstanbul’da mekanik tesisat, yangın söndürme, HVAC ve havalandırma.",
         "eyebrow": "Referanslarımız",
         "h1": "Güçlü referanslar, güvenilir mühendislik",
-        "lead": "Mekanik tesisat, yangın söndürme, HVAC ve havalandırma sistemlerinde projelendirmeden anahtar teslim uygulamaya kadar mühendislik çözümleri sunuyoruz.",
+        "lead": "Özyeğin Üniversitesi’nden Arçelik’e, Hanwha Aerospace’ten Airties’e; eğitim, sanayi, ticari ve konut projelerinde mekanik tesisat, yangın söndürme, HVAC ve havalandırma sistemlerini projelendiriyor ve uyguluyoruz.",
         "all_refs": "Tüm referanslar", "quote": "Teklif alın",
         "facts": [(str(len(REFERENCES)), "Referans proje"), (fmt_num(AREA_ROUNDED, "tr") + "+", "m² uygulama alanı"), ("7", "Uzmanlık alanı"), (str(C["founded"]), "Kuruluş yılı")],
         "marquee": "Proje deneyimimizden",
@@ -511,10 +511,10 @@ HOME = {
     },
     "en": {
         "title": "BSM Mechanical | Mechanical & Fire Protection Contractor, Istanbul",
-        "desc": "Trusted by Robert College, Özyeğin University, Arçelik and Hanwha Aerospace: an Istanbul-based contractor for mechanical, fire protection, HVAC and ventilation works.",
+        "desc": "Trusted by Özyeğin University, Arçelik, Hanwha Aerospace and Airties: an Istanbul-based contractor for mechanical, fire protection, HVAC and ventilation works.",
         "eyebrow": "Selected Projects",
         "h1": "Strong references, reliable engineering",
-        "lead": "Mechanical, fire protection, HVAC and ventilation services, from design through to turnkey delivery.",
+        "lead": "From Özyeğin University to Arçelik, Hanwha Aerospace and Airties, we design and install mechanical, fire protection, HVAC and ventilation systems for education, industrial, commercial and residential projects.",
         "all_refs": "View all projects", "quote": "Get a quote",
         "facts": [(str(len(REFERENCES)), "Reference projects"), (fmt_num(AREA_ROUNDED, "en") + "+", "m² delivered"), ("7", "Areas of expertise"), (str(C["founded"]), "Founded")],
         "marquee": "Selected clients",
@@ -929,15 +929,15 @@ def service_page(s, lang):
 # ================================================================ REFERANSLAR
 REFP = {
     "tr": {"title": f"Referanslar | {len(REFERENCES)} Proje — BSM Mekanik Mühendislik",
-           "desc": "Robert Koleji, Özyeğin Üniversitesi, Arçelik, Hanwha Aerospace, Airties ve daha fazlası: BSM Mekanik’in mekanik tesisat, yangın ve HVAC referans projeleri.",
+           "desc": "Özyeğin Üniversitesi, Arçelik, Hanwha Aerospace, Airties, Mene Health ve daha fazlası: BSM Mekanik’in mekanik tesisat, yangın ve HVAC referans projeleri.",
            "h1": "Güvenle tamamlanan projeler", "lead": f"{len(REFERENCES)} proje ve {fmt_num(TOTAL_AREA, 'tr')} m² uygulama alanı.",
            "all": "Tümü", "filter": "Hizmete göre filtrele", "empty": "Bu kategoride proje bulunamadı.",
-           "credit": "Robert Koleji fotoğrafı: Yaguzi; Özyeğin Üniversitesi fotoğrafı: Bo yaser — Wikimedia Commons, CC BY-SA 4.0."},
+           "credit": "Özyeğin Üniversitesi fotoğrafı: Bo yaser — Wikimedia Commons, CC BY-SA 4.0."},
     "en": {"title": "Projects | Selected Work — BSM Mechanical",
-           "desc": "Robert College, Özyeğin University, Arçelik, Hanwha Aerospace, Airties and more: mechanical, fire protection and HVAC projects delivered by BSM Mechanical.",
+           "desc": "Özyeğin University, Arçelik, Hanwha Aerospace, Airties, Mene Health and more: mechanical, fire protection and HVAC projects delivered by BSM Mechanical.",
            "h1": "Projects delivered with confidence.", "lead": f"{len(REFERENCES)} projects and {fmt_num(TOTAL_AREA, 'en')} m² of mechanical works delivered.",
            "all": "All", "filter": "Filter by service", "empty": "No projects found in this category.",
-           "credit": "Robert College photo: Yaguzi; Özyeğin University photo: Bo yaser — Wikimedia Commons, CC BY-SA 4.0."},
+           "credit": "Özyeğin University photo: Bo yaser — Wikimedia Commons, CC BY-SA 4.0."},
 }
 
 

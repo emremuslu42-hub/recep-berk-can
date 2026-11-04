@@ -71,7 +71,7 @@ Alan adları bağlandıktan sonra yapılacaklar:
   görselleri kullanıldı. Gerçek proje fotoğrafları geldiğinde aynı dosya adıyla değiştirilmeli:
   `besiktas-carsisi`, `nil-kuyumculuk`, `ozbarak-otel`, `arcelik-ersan`, `airties-ofis`, `cokertme-evi` (.webp)
 - **Wikimedia Commons** (CC BY-SA 4.0, künyesi referanslar sayfasında):
-  `robert-koleji.webp` — Mitchell Hall, Yaguzi · `ozyegin.webp` — Özyeğin University Campus, Bo yaser
+  `ozyegin.webp` — Özyeğin University Campus, Bo yaser
 - **Hizmet görselleri**: [Unsplash](https://unsplash.com/license)
 - **Videolar**: [Pexels](https://www.pexels.com/license/) — `hero.mp4` (#34775814), `tesisat.mp4` (#30243437)
 - **Logo**: Firmanın logo dosyasından vektöre çevrildi (`src/icons.py`, `assets/img/logo-mark.svg`).

@@ -169,7 +169,6 @@ WORK = {
 # görsel türü: "photo" = projenin kendi görseli, "logo" = firma logosu,
 #              "stock" = temsili görsel (proje görseli geldiğinde değiştirilmeli), "wiki" = Wikimedia Commons
 REFERENCES = [
-    ("robert-koleji", "wiki", "egitim", "", "Robert Koleji", "Robert College", ["isitma_sogutma", "yangin", "havalandirma", "vrf", "teknolojik_su"], 2400, "İstanbul - Beşiktaş", "2026", "2026"),
     ("besiktas-carsisi", "stock", "ticari", "", "Büyük Beşiktaş Çarşısı", "Grand Beşiktaş Bazaar", ["mekanik_proje", "yangin"], 3000, "İstanbul - Beşiktaş", "2026", "2026"),
     ("nil-kuyumculuk", "stock", "endustri", "", "Nil Kuyumculuk Atölyesi", "Nil Jewellery Workshop", ["isitma_sogutma", "yangin", "havalandirma", "vrf", "teknolojik_su"], 900, "İstanbul - Yenibosna", "2026", "2026"),
     ("ozbarak-otel", "stock", "otel", "", "Özbarak 50 Odalı Otel", "Özbarak 50-Room Hotel", ["isitma_sogutma", "yangin", "havalandirma", "vrf"], 3500, "İstanbul - Samandıra", "2026", "2026"),
@@ -188,7 +187,7 @@ REFERENCES = [
     ("mene-biopark", "photo", "endustri", "Mene Health Group A.Ş.", "Çayırova Biopark Tesisi", "Çayırova Biopark Facility", ["anahtar_tesis"], 8000, "Kocaeli - Çayırova", "2020–2021", "2020–2021"),
 ]
 
-FEATURED = ["robert-koleji", "ozyegin", "teknik-conta-silivri", "mene-biopark", "lua-dent", "model-kuyumculuk", "lenza"]
+FEATURED = ["teknik-conta-silivri", "mene-biopark", "ozyegin", "lua-dent", "model-kuyumculuk", "lenza"]
 
 # Ana sayfadaki "referans listemizden" bölümü
 HOME_REFS = ["arcelik-ersan", "hanwha", "airties-ofis", "ozbarak-otel", "kizilkayalar", "corum-gures"]
@@ -205,4 +204,4 @@ CATEGORIES = {
     "dini": ("Kamu & Dini Yapı", "Public & Religious Buildings", "dome"),
 }
 
-CLIENT_STRIP = ["Robert Koleji", "Özyeğin Üniversitesi", "Arçelik", "Hanwha Aerospace", "Airties", "Mene Health", "Teknik Conta", "Kızılkayalar", "Büyük Beşiktaş Çarşısı", "TUBA Mimarlık", "Bilişim Vadisi"]
+CLIENT_STRIP = ["Özyeğin Üniversitesi", "Arçelik", "Hanwha Aerospace", "Airties", "Mene Health", "Teknik Conta", "Kızılkayalar", "Büyük Beşiktaş Çarşısı", "TUBA Mimarlık", "Bilişim Vadisi"]
