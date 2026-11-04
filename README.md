@@ -70,9 +70,11 @@ Alan adları bağlandıktan sonra yapılacaklar:
 - **Temsili görseller**: Aşağıdaki 6 projenin listede görseli olmadığı için yapı türüne uygun Unsplash
   görselleri kullanıldı. Gerçek proje fotoğrafları geldiğinde aynı dosya adıyla değiştirilmeli:
   `besiktas-carsisi`, `nil-kuyumculuk`, `ozbarak-otel`, `arcelik-ersan`, `airties-ofis`, `cokertme-evi` (.webp)
+- **Referans listesi**: 2020–2021 ve sonrası projeler (firma revizyonu); Robert Koleji onay sürecinde olduğu için listede yok.
 - **Wikimedia Commons** (CC BY-SA 4.0, künyesi referanslar sayfasında):
   `ozyegin.webp` — Özyeğin University Campus, Bo yaser
 - **Hizmet görselleri**: [Unsplash](https://unsplash.com/license)
+- **Kurumsal fotoğraf** (`hizmet/ekip.webp`): [Pixabay](https://pixabay.com/service/license-summary/) #3979490 (kırpılmış)
 - **Videolar**: [Pexels](https://www.pexels.com/license/) — `hero.mp4` (#34775814), `tesisat.mp4` (#30243437)
 - **Logo**: Firmanın logo dosyasından vektöre çevrildi (`src/icons.py`, `assets/img/logo-mark.svg`).
 
