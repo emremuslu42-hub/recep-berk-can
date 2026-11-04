@@ -9,8 +9,7 @@ COMPANY = {
     "office_phone": "+90 (216) 706 14 01",
     "office_tel": "+902167061401",
     "people": [
-        {"name": "Mert", "email": "mert@bsmmechanical.com", "phone": "+90 546 825 80 35", "tel": "+905468258035"},
-        {"name": "Berk", "email": "berk@bsmmechanical.com", "phone": "+90 553 930 67 89", "tel": "+905539306789"},
+        {"name": "Mert BALCI", "email": "mert@bsmmechanical.com", "phone": "+90 546 825 80 35", "tel": "+905468258035"},
     ],
     "whatsapp": "905468258035",
     "domain_tr": "https://www.bsmmekanik.com",
@@ -165,7 +164,7 @@ WORK = {
     "otomasyon": ("Otomasyon işleri", "Controls and automation", ["elektrik"]),
 }
 
-# ---------------------------------------------------------------- Referanslar (Excel listesi, 2012–2026)
+# ---------------------------------------------------------------- Referanslar (Excel listesi; 2020–2021 ve sonrası)
 # (görsel, görsel türü, kategori, müşteri, proje TR, proje EN, iş kalemleri, alan m², yer, yıl TR, yıl EN)
 # görsel türü: "photo" = projenin kendi görseli, "logo" = firma logosu,
 #              "stock" = temsili görsel (proje görseli geldiğinde değiştirilmeli), "wiki" = Wikimedia Commons
@@ -187,26 +186,12 @@ REFERENCES = [
     ("hanwha", "logo", "ofis", "Hanwha Aerospace", "Tuzla Showroom ve İdari Bina", "Tuzla Showroom and Administrative Building", ["em_proje", "sulu_yangin", "havalandirma", "vrf", "elektrik"], 1200, "İstanbul - Tuzla", "2022–2023", "2022–2023"),
     ("lenza", "photo", "ticari", "TUBA Mimarlık", "Lenza Balık Restoranı", "Lenza Fish Restaurant", ["sihhi_pprc", "sulu_yangin", "havalandirma", "vrf", "dogalgaz"], 600, "İstanbul - Tuzla", "2021–2022", "2021–2022"),
     ("mene-biopark", "photo", "endustri", "Mene Health Group A.Ş.", "Çayırova Biopark Tesisi", "Çayırova Biopark Facility", ["anahtar_tesis"], 8000, "Kocaeli - Çayırova", "2020–2021", "2020–2021"),
-    ("biltur", "photo", "endustri", "Biltur Catering", "Dudullu Yemek Üretim Tesisi", "Dudullu Food Production Facility", ["kontrolluk"], 4200, "İstanbul - Ümraniye", "2019", "2019"),
-    ("bilfen", "photo", "egitim", "Bilfen Eğitim Kurumları A.Ş.", "Bilfen Maslak Kampüsü", "Bilfen Maslak Campus", ["kontrolluk"], 800, "İstanbul - Maslak", "2019", "2019"),
-    ("zekeriyakoy-villa", "photo", "konut", "Habif Mimarlık", "Zekeriyaköy Villa Projesi", "Zekeriyaköy Villa Project", ["sihhi", "havalandirma", "isitma_sogutma_tes"], 1200, "İstanbul - Sarıyer", "2018", "2018"),
-    ("kule-4", "photo", "konut", "Eser İnşaat", "Kule-4 Konut Projesi", "Kule-4 Residential Project", ["sihhi", "yangin", "havalandirma", "isitma_sogutma_tes"], 6000, "İstanbul - Kurtköy", "2017", "2017"),
-    ("astorya-ngn", "photo", "ofis", "Yapı Stüdyo Mimarlık", "Astorya NGN Office", "Astorya NGN Office", ["sihhi", "havalandirma", "isitma_sogutma_tes"], 500, "İstanbul - Şişli", "2017", "2017"),
-    ("atiye-residence", "photo", "konut", "HAS-DBN Yatırım Ortaklığı", "Atiye Residence", "Atiye Residence", ["sihhi", "yangin", "havalandirma", "isitma_sogutma_tes"], 14000, "İstanbul - Kağıthane", "2017", "2017"),
-    ("kiler-referans", "photo", "konut", "Kiler GYO", "Referans Kartal", "Referans Kartal", ["sosyal_tesis"], 2000, "İstanbul - Kartal", "2016", "2016"),
-    ("yapi-merkezi", "photo", "ofis", "Yapı Merkezi A.Ş.", "Yapı Merkezi Genel Merkez Binası", "Yapı Merkezi Headquarters", ["mek_revizyon", "elk_revizyon"], 7500, "İstanbul - Aksaray", "2016", "2016"),
-    ("licus-otel", "photo", "otel", "Licus Otelcilik", "Licus Otel", "Licus Hotel", ["insai", "sihhi", "sulu_yangin2", "havalandirma", "isitma_sogutma_tes", "kazan"], 1500, "İstanbul - Aksaray", "2015", "2015"),
-    ("sisecam-pasabahce", "photo", "endustri", "Şişecam A.Ş.", "Paşabahçe Büyükkarıştıran Fabrikası", "Paşabahçe Büyükkarıştıran Plant", ["kuru_yangin", "sprinkler", "algilama", "lng"], 50000, "Kırklareli", "2015", "2015"),
-    ("skalion-otel", "photo", "otel", "Merşa Tekstil", "Skalion Otel", "Skalion Hotel", ["sihhi", "havalandirma", "isitma_sogutma_tes"], 200, "İstanbul - Kumkapı", "2014", "2014"),
-    ("alsit-villa", "photo", "konut", "Yapı Stüdyo Mimarlık", "Alsit Villa", "Alsit Villa", ["sihhi", "havalandirma", "isitma_sogutma_tes"], 300, "İstanbul - Sarıyer", "2014", "2014"),
-    ("gosb-camii", "photo", "dini", "GOSB", "GOSB Camii", "GOSB Mosque", ["klima_yerden", "yangin", "pis_temiz", "otomasyon"], 6000, "Kocaeli - Gebze", "2013", "2013"),
-    ("sisecam-bilim", "photo", "ofis", "Şişecam A.Ş.", "Bilim ve Teknoloji Merkezi", "Science and Technology Centre", ["klima_isitma", "yangin_sprinkler", "pis_temiz", "otomasyon"], 30000, "Kocaeli - Gebze", "2012–2013", "2012–2013"),
 ]
 
-FEATURED = ["robert-koleji", "sisecam-bilim", "sisecam-pasabahce", "ozyegin", "teknik-conta-silivri", "kiler-referans", "mene-biopark", "yapi-merkezi"]
+FEATURED = ["robert-koleji", "ozyegin", "teknik-conta-silivri", "mene-biopark", "lua-dent", "model-kuyumculuk", "lenza"]
 
 # Ana sayfadaki "referans listemizden" bölümü
-HOME_REFS = ["arcelik-ersan", "hanwha", "airties-ofis", "bilfen", "lua-dent", "gosb-camii"]
+HOME_REFS = ["arcelik-ersan", "hanwha", "airties-ofis", "ozbarak-otel", "kizilkayalar", "corum-gures"]
 
 CATEGORIES = {
     "konut": ("Konut & Villa", "Residential & Villas", "home"),
@@ -220,4 +205,4 @@ CATEGORIES = {
     "dini": ("Kamu & Dini Yapı", "Public & Religious Buildings", "dome"),
 }
 
-CLIENT_STRIP = ["Robert Koleji", "Özyeğin Üniversitesi", "Şişecam", "Arçelik", "Hanwha Aerospace", "Airties", "Yapı Merkezi", "Bilfen", "Kiler GYO", "Mene Health", "Biltur", "GOSB", "Eser İnşaat", "Habif Mimarlık"]
+CLIENT_STRIP = ["Robert Koleji", "Özyeğin Üniversitesi", "Arçelik", "Hanwha Aerospace", "Airties", "Mene Health", "Teknik Conta", "Kızılkayalar", "Büyük Beşiktaş Çarşısı", "TUBA Mimarlık", "Bilişim Vadisi"]

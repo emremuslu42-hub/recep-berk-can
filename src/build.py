@@ -111,7 +111,7 @@ UI = {
         "nav": {"home": "Ana Sayfa", "about": "Kurumsal", "services": "Hizmetler", "refs": "Referanslar", "contact": "İletişim"},
         "main_menu": "Ana menü", "skip": "İçeriğe geç", "quote": "Teklif Alın", "menu": "Menüyü aç / kapat",
         "tagline": "Mekanik Mühendislik",
-        "footer_about": "Mekanik tesisat, yangın söndürme, HVAC ve havalandırma alanlarında projelendirmeden anahtar teslime mühendislik ve taahhüt hizmetleri.",
+        "footer_about": "BSM Mekanik; mekanik tesisat, yangın söndürme, HVAC ve havalandırma sistemlerinde projelendirmeden anahtar teslim uygulamaya kadar mühendislik ve taahhüt hizmetleri sunar.",
         "footer_services": "Hizmetler", "footer_company": "Kurumsal", "footer_contact": "İletişim",
         "rights": "Tüm hakları saklıdır.", "kvkk": "KVKK Aydınlatma Metni",
         "detail": "Detaylı bilgi", "breadcrumb": "Sayfa konumu",
@@ -127,7 +127,7 @@ UI = {
         "nav": {"home": "Home", "about": "About", "services": "Services", "refs": "Projects", "contact": "Contact"},
         "main_menu": "Main menu", "skip": "Skip to content", "quote": "Get a Quote", "menu": "Toggle menu",
         "tagline": "Mechanical Engineering",
-        "footer_about": "Engineering and contracting for mechanical installations, fire protection, HVAC and ventilation, from design through to turnkey delivery.",
+        "footer_about": "BSM Mechanical provides engineering and contracting services for mechanical, fire protection, HVAC and ventilation systems, from design through to turnkey delivery.",
         "footer_services": "Services", "footer_company": "Company", "footer_contact": "Contact",
         "rights": "All rights reserved.", "kvkk": "Privacy Notice",
         "detail": "Learn more", "breadcrumb": "Breadcrumb",
@@ -466,28 +466,25 @@ def process_section(lang):
 HOME = {
     "tr": {
         "title": "BSM Mekanik | İstanbul Mekanik Tesisat, Yangın, HVAC ve Havalandırma",
-        "desc": "Robert Koleji, Şişecam, Arçelik ve Özyeğin Üniversitesi referanslı BSM Mekanik; İstanbul’da mekanik tesisat, yangın söndürme, HVAC ve havalandırma.",
+        "desc": "Robert Koleji, Özyeğin Üniversitesi, Arçelik ve Hanwha Aerospace referanslı BSM Mekanik; İstanbul’da mekanik tesisat, yangın söndürme, HVAC ve havalandırma.",
         "eyebrow": "Referanslarımız",
-        "h1": "Güçlü referanslar, güvenilir mekanik mühendislik.",
-        "lead": "Mekanik tesisat, yangın söndürme, HVAC ve havalandırmada projelendirmeden anahtar teslime çözümler.",
+        "h1": "Güçlü referanslar, güvenilir mühendislik",
+        "lead": "Mekanik tesisat, yangın söndürme, HVAC ve havalandırma sistemlerinde projelendirmeden anahtar teslim uygulamaya kadar mühendislik çözümleri sunuyoruz.",
         "all_refs": "Tüm referanslar", "quote": "Teklif alın",
-        "facts": [(str(len(REFERENCES)), "Referans proje"), (fmt_num(AREA_ROUNDED, "tr") + "+", "m² uygulama alanı"), ("7", "Uzmanlık alanı"), ("2012’den", "Bugüne proje deneyimi")],
+        "facts": [(str(len(REFERENCES)), "Referans proje"), (fmt_num(AREA_ROUNDED, "tr") + "+", "m² uygulama alanı"), ("7", "Uzmanlık alanı"), (str(C["founded"]), "Kuruluş yılı")],
         "marquee": "Proje deneyimimizden",
-        "about_eyebrow": "Hakkımızda",
-        "about_h": "Projelendirmeden uygulamaya, mühendislik esaslı mekanik çözümler.",
-        "about_lead": f"2021 yılında kurulan {C['short']}; mekanik tesisat, mühendislik, projelendirme ve taahhüt alanlarında faaliyet gösteren bir mühendislik firmasıdır.",
-        "about_p": "Konut, ticari yapılar, endüstriyel tesisler ve farklı ölçeklerdeki projelere mühendislik çözümleri sunuyor; mekanik taahhüt ve anahtar teslim uygulamalarda kalite, güvenilirlik ve müşteri memnuniyetini ön planda tutuyoruz.",
-        "about_list": ["Projelendirme, tedarik, montaj ve devreye alma tek elden", "Ulusal ve uluslararası standartlara uygun uygulama", "İş güvenliği ve zamanında teslim önceliği", "Uzun ömürlü ve sürdürülebilir sistem tasarımı"],
+        "about_eyebrow": "Kurumsal",
+        "about_h": "BSM Mekanik Mühendislik",
         "badge": "Kuruluş yılı",
         "services_eyebrow": "Hizmetlerimiz",
         "services_h": "Mekanik sistemlerin tamamı, tek mühendislik ekibi.",
         "services_lead": "Yangın güvenliğinden iç hava kalitesine, sıhhi tesisattan otomasyona kadar yapınızın tüm mekanik altyapısını tasarlıyor ve uyguluyoruz.",
         "list_eyebrow": "Referans Listemizden",
         "list_h": "Eğitimden endüstriye, her ölçekte projeler.",
-        "list_lead": f"2012’den bugüne {len(REFERENCES)} projede {fmt_num(TOTAL_AREA, 'tr')} m² alanda mekanik tesisat uygulaması.",
+        "list_lead": f"{len(REFERENCES)} projede {fmt_num(TOTAL_AREA, 'tr')} m² alanda mekanik tesisat ve mühendislik uygulaması.",
         "areas_eyebrow": "Uygulama Alanları",
         "areas_h": "Her ölçekte ve her yapı türünde.",
-        "areas_lead": "Villalardan 50.000 m² üzeri fabrikalara kadar farklı ölçek ve gereksinimlerdeki projelerde deneyim.",
+        "areas_lead": "Villa ve kliniklerden 20.000 m² üzeri depo ve enerji tesislerine kadar farklı ölçek ve gereksinimlerdeki projelerde deneyim.",
         "video_eyebrow": "Anahtar Teslim",
         "video_h": "Tek muhatap, eksiksiz mekanik altyapı.",
         "video_lead": "Projelendirme, malzeme temini ve montaj süreçlerini tek elden yöneterek zaman ve maliyet kaybını en aza indiriyoruz.",
@@ -495,28 +492,25 @@ HOME = {
     },
     "en": {
         "title": "BSM Mechanical | Mechanical & Fire Protection Contractor, Istanbul",
-        "desc": "Trusted by Robert College, Şişecam, Arçelik and Özyeğin University: an Istanbul-based contractor for mechanical, fire protection, HVAC and ventilation works.",
+        "desc": "Trusted by Robert College, Özyeğin University, Arçelik and Hanwha Aerospace: an Istanbul-based contractor for mechanical, fire protection, HVAC and ventilation works.",
         "eyebrow": "Selected Projects",
-        "h1": "A proven track record in mechanical engineering",
+        "h1": "Strong references, reliable engineering",
         "lead": "Mechanical, fire protection, HVAC and ventilation services, from design through to turnkey delivery.",
         "all_refs": "View all projects", "quote": "Get a quote",
-        "facts": [(str(len(REFERENCES)), "Reference projects"), (fmt_num(AREA_ROUNDED, "en") + "+", "m² delivered"), ("7", "Areas of expertise"), ("Since 2012", "Delivering projects")],
+        "facts": [(str(len(REFERENCES)), "Reference projects"), (fmt_num(AREA_ROUNDED, "en") + "+", "m² delivered"), ("7", "Areas of expertise"), (str(C["founded"]), "Founded")],
         "marquee": "Selected clients",
         "about_eyebrow": "About Us",
-        "about_h": "Engineering-led mechanical solutions, from design to handover",
-        "about_lead": "Established in 2021, BSM Mechanical is an engineering firm specialising in mechanical installations, design and contracting.",
-        "about_p": "We serve residential, commercial and industrial projects of every size, with quality, reliability and client satisfaction at the heart of every contract and turnkey delivery.",
-        "about_list": ["Design, procurement, installation and commissioning under one roof", "Delivered to national and international standards", "A firm focus on site safety and on-time delivery", "Durable, sustainable system design"],
+        "about_h": "BSM Mechanical Engineering",
         "badge": "Founded",
         "services_eyebrow": "Our Services",
         "services_h": "Every mechanical system, one engineering team",
         "services_lead": "From fire safety to indoor air quality, plumbing to controls, we design and install your building's complete mechanical infrastructure.",
         "list_eyebrow": "From Our Portfolio",
         "list_h": "From education to industry, projects of every scale",
-        "list_lead": f"{len(REFERENCES)} projects and {fmt_num(TOTAL_AREA, 'en')} m² of mechanical works delivered since 2012.",
+        "list_lead": f"{len(REFERENCES)} projects and {fmt_num(TOTAL_AREA, 'en')} m² of mechanical and engineering works delivered.",
         "areas_eyebrow": "Sectors",
         "areas_h": "Every scale, every building type",
-        "areas_lead": "Experience on projects of every size, from private villas to manufacturing plants of over 50,000 m².",
+        "areas_lead": "Experience on projects of every size, from private villas and clinics to warehouses and energy facilities of over 20,000 m².",
         "video_eyebrow": "Turnkey Delivery",
         "video_h": "A single point of contact for your entire mechanical package",
         "video_lead": "With design, procurement and installation managed in-house, we keep programmes on track and costs under control.",
@@ -573,7 +567,7 @@ def hero_slider(lang):
     </div>
     <div class="ref-hero-visual">
       <div class="rh-stage">{slides}</div>
-      <div class="rh-thumbs">{thumbs}</div>
+      <div class="rh-thumbs" style="grid-template-columns:repeat({n}, 1fr)">{thumbs}</div>
     </div>
   </div>
   <div class="container"><div class="hero-facts">{facts}</div></div>
@@ -593,7 +587,8 @@ def home(lang):
     for k in ["konut", "ticari", "endustri", "egitim", "saglik", "otel"]:
         names = [rname(r, lang) for r in REFS if r["cat"] == k][:2]
         areas += f'<div class="area reveal">{I[CATEGORIES[k][2]]}<h3>{CATEGORIES[k][0 if lang == "tr" else 1]}</h3><p>{escape(", ".join(names))}</p></div>'
-    about_list = "".join(f"<li>{I['check_circle']}{x}</li>" for x in t["about_list"])
+    about_paras = ABOUT[lang]["paras"]
+    about_more = "".join(f'<p style="margin-top:14px">{x}</p>' for x in about_paras[1:])
     website = {"@type": "WebSite", "@id": C["domain_tr"] + "/#website", "url": absolute(paths[lang], lang),
                "name": C["short"], "inLanguage": lang, "publisher": {"@id": ORG_ID}}
     first = REF_BY[FEATURED[0]]["src"]
@@ -614,10 +609,9 @@ def home(lang):
     <div class="reveal reveal-delay-1">
       <span class="eyebrow">{t["about_eyebrow"]}</span>
       <h2 class="h-lg">{t["about_h"]}</h2>
-      <p class="lead">{t["about_lead"]}</p>
-      <p style="margin-top:16px">{t["about_p"]}</p>
-      <ul class="check-list">{about_list}</ul>
-      <a class="btn btn--outline" href="{path("about", lang)}">{u["nav"]["about"]} {I["arrow"]}</a>
+      <p class="lead">{about_paras[0]}</p>
+      {about_more}
+      <p style="margin-top:32px"><a class="btn btn--outline" href="{path("about", lang)}">{u["nav"]["about"]} {I["arrow"]}</a></p>
     </div>
   </div>
 </section>
@@ -675,16 +669,15 @@ ABOUT = {
     "tr": {
         "title": "Kurumsal | BSM Mekanik Mühendislik — Hakkımızda, Vizyon ve Misyon",
         "desc": "2021’de kurulan BSM Mekanik; mekanik tesisat, projelendirme ve taahhüt alanlarında faaliyet gösteren İstanbul merkezli bir mühendislik firmasıdır.",
-        "h1": "Kalite, güvenilirlik ve teknik uzmanlıkla büyüyen bir mühendislik firması.",
-        "lead": "Mekanik tesisat, mühendislik, projelendirme ve taahhüt alanlarında sürdürülebilir ve uzun ömürlü çözümler üretiyoruz.",
-        "intro_eyebrow": "Biz Kimiz", "intro_h": "BSM Mekanik Mühendislik",
+        "h1": "BSM Mekanik Mühendislik",
+        "lead": "Mekanik tesisat, mühendislik, projelendirme ve taahhüt alanlarında faaliyet gösteren mühendislik firması",
+        "intro_eyebrow": "Biz Kimiz", "intro_h": "Firma Profili",
         "paras": [
             f"2021 yılında kurulan {C['legal']}, mekanik tesisat, mühendislik, projelendirme ve taahhüt alanlarında faaliyet gösteren bir mühendislik firmasıdır.",
             "Yangın söndürme sistemleri, HVAC ve iklimlendirme sistemleri, havalandırma, ısıtma, soğutma ve sıhhi tesisat uygulamaları başta olmak üzere geniş bir hizmet yelpazesi sunmaktadır.",
             "Uzmanlık alanlarında edindiği bilgi birikimi ve proje deneyimiyle; konut, ticari yapılar, endüstriyel tesisler ve farklı ölçeklerdeki projelere mühendislik çözümleri sunan BSM Mekanik, mekanik taahhüt ve anahtar teslim proje uygulamalarında kalite, güvenilirlik ve müşteri memnuniyetini ön planda tutmaktadır.",
             "Projelendirmeden uygulamaya kadar tüm süreçlerde teknik gereklilikleri ve güncel mühendislik yaklaşımlarını esas alarak, sürdürülebilir ve uzun ömürlü çözümler üretmeyi hedeflemektedir.",
         ],
-        "quote": "Projelendirmeden uygulamaya kadar her aşamada <em>teknik gereklilikleri</em> ve <em>güncel mühendislik yaklaşımlarını</em> esas alıyoruz.",
         "vision": ("Vizyonumuz", [
             "Mekanik tesisat ve mühendislik sektöründe kalite, güvenilirlik ve teknik uzmanlığıyla öne çıkan, ulusal ölçekte tercih edilen ve sektörde kalıcı değer yaratan öncü mühendislik firmalarından biri olmak.",
             "Gelişen teknolojileri ve yenilikçi mühendislik yaklaşımlarını takip ederek hizmet kapasitemizi sürekli geliştirmek, sürdürülebilir projelere imza atmak ve uzun vadeli iş ortaklıkları kurmak hedefimizdir.",
@@ -693,30 +686,21 @@ ABOUT = {
             "Mühendislik bilgi birikimimizi ve teknik uzmanlığımızı kullanarak müşterilerimize güvenilir, kaliteli ve sürdürülebilir mekanik tesisat çözümleri sunmak.",
             "Üstlendiğimiz her projede iş güvenliği, kalite standartları, zamanında teslimat ve müşteri memnuniyetini ön planda tutarak, ihtiyaçlara uygun ve verimli çözümler geliştirmek temel çalışma prensibimizdir.",
         ]),
-        "values_eyebrow": "Değerlerimiz", "values_h": "Her projede değişmeyen ilkelerimiz.",
-        "values": [
-            ("shield", "İş Güvenliği", "Sahadaki her çalışanın ve yapının güvenliği önceliğimizdir."),
-            ("award", "Kalite", "Ulusal ve uluslararası standartlara uygun malzeme ve uygulama."),
-            ("clock", "Zamanında Teslim", "Planlı iş programı ve şeffaf süreç takibi."),
-            ("leaf", "Sürdürülebilirlik", "Enerji verimli, uzun ömürlü ve bakımı kolay sistemler."),
-            ("handshake", "Müşteri Memnuniyeti", "Teslimden sonra da süren, uzun vadeli iş ortaklığı."),
-        ],
         "numbers_eyebrow": "Rakamlarla", "numbers_h": "Referanslarımızla büyüyen deneyim.",
         "numbers": [(len(REFERENCES), "", "Referans proje"), (AREA_ROUNDED // 1000, "bin", "m² uygulama alanı"), (7, "", "Uzmanlık alanı"), (len({r["loc"].split(" - ")[0] for r in REFS}), "", "Farklı il")],
     },
     "en": {
         "title": "About Us | BSM Mechanical Engineering — Profile, Vision & Mission",
         "desc": "Established in 2021, BSM Mechanical is an Istanbul-based engineering firm specialising in mechanical installations, design and contracting.",
-        "h1": "An engineering firm built on quality, reliability and technical expertise",
-        "lead": "Sustainable, long-lasting solutions in mechanical installations, engineering, design and contracting.",
-        "intro_eyebrow": "Who We Are", "intro_h": "BSM Mechanical Engineering",
+        "h1": "BSM Mechanical Engineering",
+        "lead": "An engineering firm specialising in mechanical installations, engineering, design and contracting",
+        "intro_eyebrow": "Who We Are", "intro_h": "Company Profile",
         "paras": [
             f"Established in 2021, {C['legal']} (BSM Mechanical) is an engineering firm working across mechanical installations, engineering, design and contracting.",
             "Our services cover fire protection, HVAC and air conditioning, ventilation, heating, cooling and plumbing.",
             "Drawing on our technical know-how and project track record, we engineer solutions for residential, commercial and industrial projects of every scale, and put quality, reliability and client satisfaction first on every contract and turnkey delivery.",
             "From design to handover, every decision we make is grounded in technical requirements and current engineering practice, with the aim of delivering systems that are sustainable and built to last.",
         ],
-        "quote": "From design to handover, every decision is grounded in <em>technical requirements</em> and <em>current engineering practice</em>.",
         "vision": ("Our Vision", [
             "To be one of Türkiye's leading mechanical engineering firms, the partner of choice nationwide for quality, reliability and technical expertise, creating lasting value for the industry.",
             "By embracing new technologies and innovative engineering, we aim to keep growing our capabilities, deliver sustainable projects and build long-term partnerships.",
@@ -725,14 +709,6 @@ ABOUT = {
             "To give our clients reliable, high-quality and sustainable mechanical solutions, backed by sound engineering knowledge and technical expertise.",
             "On every project, we put health and safety, quality, on-time delivery and client satisfaction first, developing efficient solutions tailored to each client's needs.",
         ]),
-        "values_eyebrow": "Our Values", "values_h": "The principles behind every project",
-        "values": [
-            ("shield", "Health & Safety", "The safety of everyone on site, and of every building we work on, comes first."),
-            ("award", "Quality", "Materials and workmanship that meet national and international standards."),
-            ("clock", "On-time Delivery", "A realistic programme and transparent progress reporting."),
-            ("leaf", "Sustainability", "Energy-efficient, durable systems that are easy to maintain."),
-            ("handshake", "Client Focus", "A long-term partnership that continues well beyond handover."),
-        ],
         "numbers_eyebrow": "In Numbers", "numbers_h": "Experience built on our track record",
         "numbers": [(len(REFERENCES), "", "Reference projects"), (AREA_ROUNDED // 1000, "k", "m² delivered"), (7, "", "Areas of expertise"), (len({r["loc"].split(" - ")[0] for r in REFS}), "", "Provinces")],
     },
@@ -747,9 +723,6 @@ def about(lang):
     paras = "".join(f"<p>{p}</p>" for p in t["paras"][1:])
     vis = "".join(f"<p>{p}</p>" for p in t["vision"][1])
     mis = "".join(f"<p>{p}</p>" for p in t["mission"][1])
-    values = "".join(
-        f'<div class="value reveal{" reveal-delay-" + str(i % 4) if i % 4 else ""}">{I[ic]}<h3>{h}</h3><p>{p}</p></div>'
-        for i, (ic, h, p) in enumerate(t["values"]))
     nums = "".join(
         f'<div class="stat reveal"><strong><span data-count="{n}">{n}</span>{"<sup>" + s + "</sup>" if s else ""}</strong><span>{lbl}</span></div>'
         for n, s, lbl in t["numbers"])
@@ -773,18 +746,10 @@ def about(lang):
 
 <section class="section section--bg">
   <div class="container">
-    <p class="big-quote reveal" style="margin-bottom:clamp(40px,6vw,64px)">{t["quote"]}</p>
     <div class="mv-grid">
       <div class="mv-card mv-card--brand reveal">{I["eye"]}<h2 class="h-md">{t["vision"][0]}</h2>{vis}</div>
       <div class="mv-card reveal reveal-delay-1">{I["target"]}<h2 class="h-md">{t["mission"][0]}</h2>{mis}</div>
     </div>
-  </div>
-</section>
-
-<section class="section section--dark">
-  <div class="container">
-    <div class="section-head"><span class="eyebrow">{t["values_eyebrow"]}</span><h2 class="h-lg">{t["values_h"]}</h2></div>
-    <div class="values">{values}</div>
   </div>
 </section>
 
@@ -855,7 +820,7 @@ SVC_UI = {
                ("Projelendirme ve uygulamayı birlikte üstleniyor musunuz?",
                 "Evet. Keşif ve projelendirmeden malzeme temini, montaj, test ve devreye almaya kadar tüm süreci tek muhatap olarak yönetebiliyor; ihtiyaca göre yalnızca projelendirme, kontrollük veya uygulama aşamasında da hizmet verebiliyoruz."),
                ("Hangi bölgelerde hizmet veriyorsunuz?",
-                "İstanbul Maltepe merkezli olarak başta İstanbul ve Kocaeli olmak üzere Türkiye genelinde çalışıyoruz; Kırklareli, Çorum, Nevşehir ve Muğla’da da tamamlanmış projelerimiz bulunuyor."),
+                "İstanbul Maltepe merkezli olarak başta İstanbul ve Kocaeli olmak üzere Türkiye genelinde çalışıyoruz; Çorum, Nevşehir ve Muğla’da da projelerimiz bulunuyor."),
                ("Teklif almak için hangi bilgiler gerekiyor?",
                 "Projenin türünü, yaklaşık alanını (m²), konumunu ve talep ettiğiniz hizmetleri iletişim formu, telefon veya e-posta ile iletmeniz yeterli. Gerekirse keşif planlayarak teknik değerlendirme ve teklifimizi hazırlıyoruz."),
            ]},
@@ -869,7 +834,7 @@ SVC_UI = {
                ("Do you handle both design and installation?",
                 "Yes. We can act as your single point of contact for the whole process, from survey and design through procurement, installation, testing and commissioning, or support you at the design, site supervision or installation stage only."),
                ("Which regions do you cover?",
-                "We are based in Maltepe, Istanbul, and work across Türkiye, mainly in Istanbul and Kocaeli, with completed projects in Kırklareli, Çorum, Nevşehir and Muğla."),
+                "We are based in Maltepe, Istanbul, and work across Türkiye, mainly in Istanbul and Kocaeli, with projects in Çorum, Nevşehir and Muğla."),
                ("What information do you need for a quote?",
                 "Just send us the project type, approximate floor area (m²), location and the services you need, via the contact form, phone or email. Where needed, we will arrange a site survey before preparing our technical assessment and quotation."),
            ]},
@@ -941,14 +906,14 @@ def service_page(s, lang):
 
 # ================================================================ REFERANSLAR
 REFP = {
-    "tr": {"title": "Referanslar | 31 Proje — BSM Mekanik Mühendislik",
-           "desc": "Robert Koleji, Şişecam, Arçelik, Özyeğin Üniversitesi, Hanwha Aerospace ve daha fazlası: BSM Mekanik’in 2012’den bugüne mekanik tesisat referans projeleri.",
-           "h1": "Güvenle tamamlanan projeler.", "lead": f"2012’den bugüne {len(REFERENCES)} proje ve {fmt_num(TOTAL_AREA, 'tr')} m² uygulama alanı.",
+    "tr": {"title": f"Referanslar | {len(REFERENCES)} Proje — BSM Mekanik Mühendislik",
+           "desc": "Robert Koleji, Özyeğin Üniversitesi, Arçelik, Hanwha Aerospace, Airties ve daha fazlası: BSM Mekanik’in mekanik tesisat, yangın ve HVAC referans projeleri.",
+           "h1": "Güvenle tamamlanan projeler", "lead": f"{len(REFERENCES)} proje ve {fmt_num(TOTAL_AREA, 'tr')} m² uygulama alanı.",
            "all": "Tümü", "filter": "Hizmete göre filtrele", "empty": "Bu kategoride proje bulunamadı.",
            "credit": "Robert Koleji fotoğrafı: Yaguzi; Özyeğin Üniversitesi fotoğrafı: Bo yaser — Wikimedia Commons, CC BY-SA 4.0."},
-    "en": {"title": "Projects | Selected Work Since 2012 — BSM Mechanical",
-           "desc": "Robert College, Şişecam, Arçelik, Özyeğin University, Hanwha Aerospace and more: mechanical, fire protection and HVAC projects delivered by BSM Mechanical since 2012.",
-           "h1": "Projects delivered with confidence.", "lead": f"{len(REFERENCES)} projects and {fmt_num(TOTAL_AREA, 'en')} m² of mechanical works delivered since 2012.",
+    "en": {"title": "Projects | Selected Work — BSM Mechanical",
+           "desc": "Robert College, Özyeğin University, Arçelik, Hanwha Aerospace, Airties and more: mechanical, fire protection and HVAC projects delivered by BSM Mechanical.",
+           "h1": "Projects delivered with confidence.", "lead": f"{len(REFERENCES)} projects and {fmt_num(TOTAL_AREA, 'en')} m² of mechanical works delivered.",
            "all": "All", "filter": "Filter by service", "empty": "No projects found in this category.",
            "credit": "Robert College photo: Yaguzi; Özyeğin University photo: Bo yaser — Wikimedia Commons, CC BY-SA 4.0."},
 }
@@ -970,7 +935,7 @@ def refs(lang):
             "mainEntity": {"@type": "ItemList", "numberOfItems": len(REFS), "itemListElement": [
                 {"@type": "ListItem", "position": i + 1, "name": rname(r, lang)} for i, r in enumerate(REFS)]}}
     return head(lang, t["title"], t["desc"], paths, ld(coll, breadcrumb_schema(crumbs, lang))) + header(lang, "refs", paths) \
-        + page_hero(lang, t["h1"], t["lead"], "/assets/img/ref/sisecam-bilim.webp", crumbs) + f'''<main id="icerik">
+        + page_hero(lang, t["h1"], t["lead"], "/assets/img/ref/teknik-conta-silivri.webp", crumbs) + f'''<main id="icerik">
 <section class="section">
   <div class="container">
     <div class="filter-bar" data-filter role="group" aria-label="{t["filter"]}">{btns}</div>
@@ -1032,7 +997,7 @@ def contact(lang):
     mailto = ",".join(p["email"] for p in C["people"])
     opts = "".join(f'<option data-key="{s["key"]}" value="{s[lang]["name"]}">{s[lang]["name"]}</option>' for s in SERVICES)
     mq = quote(C["map_query"])
-    phones = "".join(f'<span class="label">{p["name"]} · {t["mobile"]}</span><a href="tel:{p["tel"]}">{p["phone"]}</a>' for p in C["people"])
+    phones = "".join(f'<span class="label">{t["mobile"]}</span><a href="tel:{p["tel"]}">{p["phone"]}</a>' for p in C["people"])
     mails = "".join(f'<span class="label">{p["name"]}</span><a href="mailto:{p["email"]}">{p["email"]}</a>' for p in C["people"])
     kvkk = "".join(f'<p class="text-muted" style="max-width:90ch;margin-top:12px">{p}</p>' for p in t["kvkk"])
     page = {"@type": "ContactPage", "url": absolute(paths[lang], lang), "name": t["title"], "inLanguage": lang, "about": {"@id": ORG_ID}}

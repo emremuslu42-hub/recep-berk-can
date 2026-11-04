@@ -15,11 +15,11 @@ const fontCss = `
 @font-face{font-family:J;src:url(${font("plus-jakarta-sans-latin-wght-normal.woff2")});font-weight:200 800;unicode-range:U+0000-00FF,U+0131,U+2000-206F}
 @font-face{font-family:J;src:url(${font("plus-jakarta-sans-latin-ext-wght-normal.woff2")});font-weight:200 800;unicode-range:U+0100-02BA,U+0130,U+015E-015F,U+011E-011F}
 *{margin:0;box-sizing:border-box}body{font-family:J,sans-serif}`;
-const bg = "data:image/webp;base64," + fs.readFileSync(img("ref/sisecam-bilim.webp")).toString("base64");
+const bg = "data:image/webp;base64," + fs.readFileSync(img("ref/teknik-conta-silivri.webp")).toString("base64");
 
 const og = (lang) => {
   const t = lang === "tr"
-    ? { h: "Mekanik Tesisat · Yangın · HVAC · Havalandırma", s: "Projelendirmeden anahtar teslime mühendislik ve taahhüt", d: "bsmmekanik.com" }
+    ? { h: "Mekanik Tesisat · Yangın · HVAC · Havalandırma", s: "Projelendirmeden anahtar teslim uygulamaya mühendislik ve taahhüt", d: "bsmmekanik.com" }
     : { h: "Mechanical · Fire Protection · HVAC · Ventilation", s: "Engineering and contracting, from design to turnkey delivery", d: "bsmmechanical.com" };
   return `<html><head><style>${fontCss}
   body{width:1200px;height:630px;position:relative;overflow:hidden;background:#0a1630;color:#fff}
