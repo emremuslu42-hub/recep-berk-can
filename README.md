@@ -78,10 +78,24 @@ Alan adları bağlandıktan sonra yapılacaklar:
 - **Videolar**: [Pexels](https://www.pexels.com/license/) — `hero.mp4` (#34775814), `tesisat.mp4` (#30243437)
 - **Logo**: Firmanın logo dosyasından vektöre çevrildi (`src/icons.py`, `assets/img/logo-mark.svg`).
 
-## Formlar
+## Teklif formu
 
-İletişim formu ziyaretçinin e-posta uygulamasını mert@ ve berk@ adreslerine doldurulmuş olarak açar.
-İleride doğrudan gönderim istenirse (Formspree, Cloudflare Worker + e-posta vb.) bağlanabilir.
+Form, `/api/teklif` adresine gönderilir; Caddy bunu sunucudaki form alıcıya (`deploy/form-server/server.js`,
+127.0.0.1:8787, bağımlılıksız Node.js) yönlendirir. Alıcı mesajı Google Workspace SMTP ile (gönderen:
+Nesak Yazılım hesabı) `mert@bsmmechanical.com` adresine e-posta olarak iletir; e-postayı yanıtlamak doğrudan
+formu dolduran kişiye gider. Koruma: gizli tuzak alanı, yalnızca kendi alan adlarından gelen istekler,
+IP başına 10 dakikada 5 gönderim, alan uzunluk sınırları, e-posta başlığına satır sonu enjeksiyonu engeli.
+
+Form alıcıya ulaşılamazsa (kurulmamış/kapalı) site, ziyaretçinin e-posta uygulamasını doldurulmuş olarak açar;
+mesaj kaybolmaz.
+
+Kurulum (Windows sunucu, Yönetici PowerShell; uygulama şifresi sorulur, deneme e-postası gönderilir):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File C:\bsmmekanik\deploy\setup-form.ps1
+```
+
+Ayarlar `C:\bsmmekanik-key\form.json` (yalnızca Yönetici/SYSTEM), kayıtlar `C:\bsmmekanik-key\form.log`.
 WhatsApp düğmesi Mert'in cep numarasına bağlıdır (`content.py` → `whatsapp`).
 
 ## Kendi sunucunda (VDS) yayın

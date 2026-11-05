@@ -21,6 +21,9 @@
 	header /assets/video/* Cache-Control "public, max-age=86400"
 
 	route {
+		# Teklif formu → sunucudaki form alıcı (deploy/form-server/server.js)
+		reverse_proxy /api/teklif* 127.0.0.1:8787
+
 		# Eski / alternatif adresler
 		redir /en/references /en/projects permanent
 		redir /en /en/ permanent

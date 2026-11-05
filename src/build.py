@@ -982,12 +982,16 @@ CONT = {
                  "msg_ph": "Proje türü, alan (m²), konum ve talep ettiğiniz hizmetleri yazmanız değerlendirmemizi hızlandırır.",
                  "choose": "Seçiniz", "other": "Diğer",
                  "consent": "Kişisel verilerimin talebime dönüş yapılması amacıyla işlenmesini kabul ediyorum (<a href=\"#kvkk\">KVKK Aydınlatma Metni</a>).",
-                 "send": "Gönder", "subject": "Web sitesi talebi", "success": "Teşekkürler! E-posta uygulamanız açılıyor; mesajınızı göndermeniz yeterli."},
+                 "send": "Gönder", "subject": "Web sitesi talebi", "sending": "Gönderiliyor…",
+                 "success": "Teşekkürler, mesajınız iletildi. En kısa sürede size dönüş yapacağız.",
+                 "error": "Mesajınız şu anda gönderilemedi. Lütfen {mail} adresine e-posta gönderin ya da {phone} numaralı telefondan bize ulaşın.",
+                 "rate": "Kısa sürede çok fazla gönderim yapıldı. Lütfen birkaç dakika sonra tekrar deneyin.",
+                 "invalid": "Lütfen işaretli alanları kontrol edin.", "hp": "Bu alanı boş bırakın"},
            "map": "BSM Mekanik ofis konumu", "directions": "Yol tarifi al",
            "kvkk_h": "KVKK Aydınlatma Metni",
            "kvkk": [
                f"Veri sorumlusu {C['legal']} (“BSM Mekanik”) olarak, iletişim formu, e-posta, telefon veya WhatsApp üzerinden ilettiğiniz ad-soyad, firma, e-posta, telefon ve mesaj içeriği bilgilerinizi; yalnızca talebinize dönüş yapmak, teklif hazırlamak ve sizinle iletişim kurmak amacıyla, 6698 sayılı Kişisel Verilerin Korunması Kanunu’nun 5. maddesi kapsamında açık rızanıza ve bir sözleşmenin kurulmasıyla doğrudan ilgili olmasına dayanarak işliyoruz.",
-               "Kişisel verileriniz, yasal yükümlülükler dışında üçüncü kişilerle paylaşılmaz ve işleme amacının gerektirdiği süre boyunca saklanır. Web sitemiz reklam veya takip amaçlı çerez kullanmaz; iletişim sayfasındaki harita Google Maps tarafından sağlanır ve Google’ın gizlilik politikasına tabidir.",
+               "İletişim formundan gönderilen mesajlar, web sitesi hizmet sağlayıcımızın e-posta altyapısı (Google Workspace) aracılığıyla tarafımıza e-posta olarak iletilir. Kişisel verileriniz, yasal yükümlülükler dışında üçüncü kişilerle paylaşılmaz ve işleme amacının gerektirdiği süre boyunca saklanır. Web sitemiz reklam veya takip amaçlı çerez kullanmaz; iletişim sayfasındaki harita Google Maps tarafından sağlanır ve Google’ın gizlilik politikasına tabidir.",
                f"KVKK’nın 11. maddesi uyarınca verilerinizin işlenip işlenmediğini öğrenme, düzeltilmesini veya silinmesini isteme gibi haklarınızı kullanmak için {C['people'][0]['email']} adresine yazabilirsiniz.",
            ]},
     "en": {"title": "Contact | BSM Mechanical — Maltepe, Istanbul",
@@ -999,12 +1003,16 @@ CONT = {
                  "msg_ph": "Tell us the project type, floor area (m²), location and services required so we can respond faster.",
                  "choose": "Select", "other": "Other",
                  "consent": "I consent to my personal data being processed in order to respond to my request (<a href=\"#kvkk\">Privacy Notice</a>).",
-                 "send": "Send", "subject": "Website enquiry", "success": "Thank you! Your email app is opening; just press send."},
+                 "send": "Send", "subject": "Website enquiry", "sending": "Sending…",
+                 "success": "Thank you, your message has been sent. We will get back to you shortly.",
+                 "error": "Your message could not be sent right now. Please email {mail} or call us on {phone}.",
+                 "rate": "Too many messages in a short time. Please try again in a few minutes.",
+                 "invalid": "Please check the highlighted fields.", "hp": "Leave this field empty"},
            "map": "BSM Mechanical office location", "directions": "Get directions",
            "kvkk_h": "Privacy Notice",
            "kvkk": [
                f"As data controller, {C['legal']} (“BSM Mechanical”) processes the name, company, email, phone and message details you send via the contact form, email, phone or WhatsApp solely to respond to your request, prepare proposals and communicate with you, under Article 5 of Turkish Personal Data Protection Law No. 6698, based on your explicit consent and as directly related to establishing a contract.",
-               "Your personal data is not shared with third parties except where required by law, and is kept only as long as the purpose requires. Our website does not use advertising or tracking cookies; the map on the contact page is provided by Google Maps and subject to Google’s privacy policy.",
+               "Messages sent through the contact form are delivered to us by email via our website service provider’s email infrastructure (Google Workspace). Your personal data is not shared with third parties except where required by law, and is kept only as long as the purpose requires. Our website does not use advertising or tracking cookies; the map on the contact page is provided by Google Maps and subject to Google’s privacy policy.",
                f"To exercise your rights under Article 11 of the Law, such as learning whether your data is processed or requesting its correction or deletion, please write to {C['people'][0]['email']}.",
            ]},
 }
@@ -1017,6 +1025,7 @@ def contact(lang):
     paths = {l: path("contact", l) for l in LANGS}
     crumbs = [(u["nav"]["home"], path("home", lang)), (u["nav"]["contact"], paths[lang])]
     mailto = ",".join(p["email"] for p in C["people"])
+    err_msg = f["error"].format(mail=f'<a href="mailto:{mailto}">{mailto}</a>', phone=f'<a href="tel:{C["office_tel"]}">{C["office_phone"]}</a>')
     opts = "".join(f'<option data-key="{s["key"]}" value="{s[lang]["name"]}">{s[lang]["name"]}</option>' for s in SERVICES)
     mq = quote(C["map_query"])
     phones = "".join(f'<span class="label">{t["mobile"]}</span><a href="tel:{p["tel"]}">{p["phone"]}</a>' for p in C["people"])
@@ -1033,7 +1042,9 @@ def contact(lang):
       <div class="contact-card reveal reveal-delay-2">{I["mail_lg"]}<h2 class="h-md" style="font-size:18px">{t["email"]}</h2>{mails}</div>
     </div>
     <div class="contact-grid">
-      <form class="form reveal" data-contact-form novalidate data-mailto="{mailto}" data-subject="{f["subject"]}" data-success="{f["success"]}"
+      <form class="form reveal" data-contact-form novalidate action="/api/teklif" method="post" data-lang="{lang}"
+            data-mailto="{mailto}" data-subject="{f["subject"]}" data-sending="{f["sending"]}" data-success="{f["success"]}"
+            data-error="{escape(err_msg)}" data-rate="{f["rate"]}" data-invalid="{f["invalid"]}"
             data-l-name="{f["name"]}" data-l-company="{f["company"]}" data-l-email="{f["email"]}" data-l-phone="{f["phone"]}" data-l-topic="{f["topic"]}">
         <div><span class="eyebrow">{t["form_eyebrow"]}</span><h2 class="h-md">{t["form_h"]}</h2></div>
         <div class="form-row">
@@ -1047,6 +1058,7 @@ def contact(lang):
         <div class="field"><label for="konu">{f["topic"]}</label><select id="konu" name="konu"><option value="">{f["choose"]}</option>{opts}<option value="{f["other"]}">{f["other"]}</option></select></div>
         <div class="field"><label for="mesaj">{f["msg"]} *</label><textarea id="mesaj" name="mesaj" placeholder="{f["msg_ph"]}" required></textarea></div>
         <label class="form-consent"><input type="checkbox" name="kvkk" required><span>{f["consent"]} *</span></label>
+        <div class="hp" aria-hidden="true"><label for="website">{f["hp"]}</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
         <div><button class="btn btn--primary" type="submit">{f["send"]} {I["arrow"]}</button></div>
         <p class="form-status" role="status" aria-live="polite"></p>
       </form>

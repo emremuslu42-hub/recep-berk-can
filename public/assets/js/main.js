@@ -203,14 +203,19 @@
     document.querySelectorAll("video[autoplay]").forEach(function (v) { v.removeAttribute("autoplay"); v.pause(); });
   }
 
-  // İletişim formu: e-posta istemcisini doldurulmuş olarak açar
+  // İletişim formu: /api/teklif'e gönderir (sunucudaki form alıcı e-postayla iletir)
   var form = document.querySelector("[data-contact-form]");
   if (form) {
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (!form.reportValidity()) return;
-      var d = new FormData(form);
-      var L = form.dataset;
+    var L = form.dataset;
+    var status = form.querySelector(".form-status");
+    var button = form.querySelector("button[type=submit]");
+    var buttonHtml = button ? button.innerHTML : "";
+    function setStatus(html, ok) {
+      if (!status) return;
+      status.innerHTML = html;
+      status.classList.toggle("is-error", !ok);
+    }
+    function mailtoFallback(d) {
       var subject = L.subject + " — " + (d.get("konu") || "-");
       var body = [
         L.lName + ": " + d.get("ad"),
@@ -221,9 +226,46 @@
         "",
         d.get("mesaj")
       ].join("\n");
-      window.location.href = "mailto:" + L.mailto + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-      var status = form.querySelector(".form-status");
-      if (status) status.textContent = L.success;
+      return "mailto:" + L.mailto + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    }
+    // Form alıcıya ulaşılamazsa mesaj kaybolmasın: e-posta uygulamasını doldurulmuş olarak aç
+    function fallback(d) {
+      setStatus(L.error, false);
+      window.location.href = mailtoFallback(d);
+    }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) { setStatus(L.invalid, false); return; }
+      var d = new FormData(form);
+      var payload = {
+        ad: d.get("ad"), firma: d.get("firma"), eposta: d.get("eposta"), telefon: d.get("telefon"),
+        konu: d.get("konu"), mesaj: d.get("mesaj"), kvkk: d.get("kvkk") ? "on" : "",
+        website: d.get("website"), lang: L.lang, sayfa: location.pathname
+      };
+      if (button) { button.disabled = true; button.textContent = L.sending; }
+      setStatus("", true);
+      fetch(form.getAttribute("action"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }).then(function (r) {
+        return r.json().catch(function () { return { ok: false }; }).then(function (j) { return { status: r.status, body: j }; });
+      }).then(function (res) {
+        if (res.body && res.body.ok) {
+          form.reset();
+          setStatus(L.success, true);
+        } else if (res.status === 429) {
+          setStatus(L.rate, false);
+        } else if (res.status === 422) {
+          setStatus(L.invalid, false);
+        } else {
+          fallback(d);
+        }
+      }).catch(function () {
+        fallback(d);
+      }).then(function () {
+        if (button) { button.disabled = false; button.innerHTML = buttonHtml; }
+      });
     });
     var pre = new URLSearchParams(location.search).get("hizmet");
     var sel = form.querySelector("select[name=konu]");
