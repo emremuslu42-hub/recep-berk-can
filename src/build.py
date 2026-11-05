@@ -487,8 +487,8 @@ HOME = {
         "title": "BSM Mekanik | İstanbul Mekanik Tesisat, Yangın, HVAC ve Havalandırma",
         "desc": "Özyeğin Üniversitesi, Arçelik, Hanwha Aerospace ve Airties referanslı BSM Mekanik; İstanbul’da mekanik tesisat, yangın söndürme, HVAC ve havalandırma.",
         "eyebrow": "Referanslarımız",
-        "h1": "Güçlü referanslar, güvenilir mühendislik",
-        "lead": "Özyeğin Üniversitesi’nden Arçelik’e, Hanwha Aerospace’ten Airties’e; eğitim, sanayi, ticari ve konut projelerinde mekanik tesisat, yangın söndürme, HVAC ve havalandırma sistemlerini projelendiriyor ve uyguluyoruz.",
+        "h1": "“Güçlü referanslar, güvenilir mühendislik”",
+        "lead": "",
         "all_refs": "Tüm referanslar", "quote": "Teklif alın",
         "facts": [(str(len(REFERENCES)), "Referans proje"), (fmt_num(AREA_ROUNDED, "tr") + "+", "m² uygulama alanı"), ("7", "Uzmanlık alanı"), (str(C["founded"]), "Kuruluş yılı")],
         "marquee": "Proje deneyimimizden",
@@ -513,8 +513,8 @@ HOME = {
         "title": "BSM Mechanical | Mechanical & Fire Protection Contractor, Istanbul",
         "desc": "Trusted by Özyeğin University, Arçelik, Hanwha Aerospace and Airties: an Istanbul-based contractor for mechanical, fire protection, HVAC and ventilation works.",
         "eyebrow": "Selected Projects",
-        "h1": "Strong references, reliable engineering",
-        "lead": "From Özyeğin University to Arçelik, Hanwha Aerospace and Airties, we design and install mechanical, fire protection, HVAC and ventilation systems for education, industrial, commercial and residential projects.",
+        "h1": "“Strong references, reliable engineering”",
+        "lead": "",
         "all_refs": "View all projects", "quote": "Get a quote",
         "facts": [(str(len(REFERENCES)), "Reference projects"), (fmt_num(AREA_ROUNDED, "en") + "+", "m² delivered"), ("7", "Areas of expertise"), (str(C["founded"]), "Founded")],
         "marquee": "Selected clients",
@@ -570,7 +570,7 @@ def hero_slider(lang):
     <div class="ref-hero-text on-dark">
       <span class="eyebrow">{t["eyebrow"]}</span>
       <h1>{t["h1"]}</h1>
-      <p class="ref-hero-lead">{t["lead"]}</p>
+      {'<p class="ref-hero-lead">' + t["lead"] + '</p>' if t["lead"] else ''}
       <div class="rh-infos" aria-live="polite">
         {infos}
       </div>
