@@ -29,7 +29,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin-ext-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/style.css?v=38acfea951">
+<link rel="stylesheet" href="/assets/css/style.css?v=ffe4bcf328">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "ContactPage", "url": "https://www.bsmmechanical.com/en/contact", "name": "Contact | BSM Mechanical — Maltepe, Istanbul", "inLanguage": "en", "about": {"@id": "https://www.bsmmekanik.com/#organizasyon"}}, {"@type": "HVACBusiness", "@id": "https://www.bsmmekanik.com/#organizasyon", "name": "BSM Mekanik Mühendislik İnşaat Sanayi ve Ticaret Limited Şirketi", "alternateName": ["BSM Mekanik", "BSM Mechanical"], "url": "https://www.bsmmekanik.com/", "logo": "https://www.bsmmekanik.com/assets/img/logo-512.png", "image": "https://www.bsmmekanik.com/assets/img/og-tr.jpg", "description": "Mekanik tesisat, yangın söndürme sistemleri, HVAC, havalandırma, mühendislik ve anahtar teslim taahhüt hizmetleri.", "foundingDate": "2021", "telephone": "+902167061401", "email": "mert@bsmmechanical.com", "address": {"@type": "PostalAddress", "streetAddress": "Altıntepe Mah. İstasyon Yolu Sok. No:3/1", "addressLocality": "Maltepe", "addressRegion": "İstanbul", "addressCountry": "TR"}, "areaServed": {"@type": "Country", "name": "Türkiye"}, "contactPoint": [{"@type": "ContactPoint", "telephone": "+905468258035", "email": "mert@bsmmechanical.com", "contactType": "sales", "name": "Mert BALCI", "availableLanguage": ["Turkish", "English"]}], "knowsAbout": ["Mekanik Tesisat", "Yangın Söndürme Sistemleri", "HVAC ve İklimlendirme", "Havalandırma Sistemleri", "Mühendislik ve Projelendirme", "Mekanik Taahhüt ve Anahtar Teslim", "Elektrik ve Otomasyon"], "sameAs": ["https://www.bsmmechanical.com/"]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.bsmmechanical.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Contact", "item": "https://www.bsmmechanical.com/en/contact"}]}]}</script>
 </head>
 <body>
@@ -98,21 +98,28 @@
         </div>
         <div class="field"><label for="konu">Service</label><select id="konu" name="konu"><option value="">Select</option><option data-key="mekanik" value="Mechanical Installations">Mechanical Installations</option><option data-key="yangin" value="Fire Protection Systems">Fire Protection Systems</option><option data-key="hvac" value="HVAC & Air Conditioning">HVAC & Air Conditioning</option><option data-key="havalandirma" value="Ventilation Systems">Ventilation Systems</option><option data-key="proje" value="Engineering & Design">Engineering & Design</option><option data-key="taahhut" value="Mechanical Contracting & Turnkey">Mechanical Contracting & Turnkey</option><option data-key="elektrik" value="Electrical & Controls">Electrical & Controls</option><option value="Other">Other</option></select></div>
         <div class="field"><label for="mesaj">Message *</label><textarea id="mesaj" name="mesaj" placeholder="Tell us the project type, floor area (m²), location and services required so we can respond faster." required></textarea></div>
-        <label class="form-consent"><input type="checkbox" name="kvkk" required><span>I consent to my personal data being processed in order to respond to my request (<a href="#kvkk">Privacy Notice</a>). *</span></label>
+        <label class="form-consent"><input type="checkbox" name="kvkk" required><span>I have read the <a href="/en/privacy" target="_blank" rel="noopener">Privacy Notice</a>. *</span></label>
         <div class="hp" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
         <div><button class="btn btn--primary" type="submit">Send <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
         <p class="form-status" role="status" aria-live="polite"></p>
       </form>
-      <div class="map-box reveal reveal-delay-1">
-        <iframe title="BSM Mechanical office location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Alt%C4%B1ntepe%20Mah.%20%C4%B0stasyon%20Yolu%20Sok.%20No%3A3%20Maltepe%20%C4%B0stanbul&amp;z=16&amp;hl=en&amp;output=embed"></iframe>
+      <div class="map-box map-box--consent reveal reveal-delay-1" data-map-src="https://maps.google.com/maps?q=Alt%C4%B1ntepe%20Mah.%20%C4%B0stasyon%20Yolu%20Sok.%20No%3A3%20Maltepe%20%C4%B0stanbul&amp;z=16&amp;hl=en&amp;output=embed" data-map-title="BSM Mechanical office location">
+        <div class="map-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <p class="map-address"><strong>Altıntepe Mah. İstasyon Yolu Sok. No:3/1</strong><br>Maltepe / İstanbul</p>
+          <p class="map-note">The map loads from Google Maps only when you press the button. Google may then use its own cookies.</p>
+          <div class="map-actions">
+            <button class="btn btn--primary" type="button" data-map-load>Show map</button>
+            <a class="btn btn--outline" href="https://www.google.com/maps/search/?api=1&amp;query=Alt%C4%B1ntepe%20Mah.%20%C4%B0stasyon%20Yolu%20Sok.%20No%3A3%20Maltepe%20%C4%B0stanbul" target="_blank" rel="noopener">Open in Google Maps</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 <section class="section--tight section--bg" id="kvkk">
   <div class="container">
-    <h2 class="h-md" style="margin-bottom:6px">Privacy Notice</h2>
-    <p class="text-muted" style="max-width:90ch;margin-top:12px">As data controller, BSM Mekanik Mühendislik İnşaat Sanayi ve Ticaret Limited Şirketi (“BSM Mechanical”) processes the name, company, email, phone and message details you send via the contact form, email, phone or WhatsApp solely to respond to your request, prepare proposals and communicate with you, under Article 5 of Turkish Personal Data Protection Law No. 6698, based on your explicit consent and as directly related to establishing a contract.</p><p class="text-muted" style="max-width:90ch;margin-top:12px">Messages sent through the contact form are delivered to us by email via our website service provider’s email infrastructure (Google Workspace). Your personal data is not shared with third parties except where required by law, and is kept only as long as the purpose requires. Our website does not use advertising or tracking cookies; the map on the contact page is provided by Google Maps and subject to Google’s privacy policy.</p><p class="text-muted" style="max-width:90ch;margin-top:12px">To exercise your rights under Article 11 of the Law, such as learning whether your data is processed or requesting its correction or deletion, please write to mert@bsmmechanical.com.</p>
+    <p class="text-muted" style="max-width:90ch">The information you share in the form is used only to respond to your request. For details, see our <a class="link-arrow" href="/en/privacy">Privacy Notice <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
   </div>
 </section>
 </main>
@@ -157,11 +164,12 @@
     </div>
     <div class="footer-bottom">
       <span>© <span data-year>2026</span> BSM Mekanik Mühendislik İnşaat Sanayi ve Ticaret Limited Şirketi. All rights reserved.</span>
-      <a href="/en/contact#kvkk">Privacy Notice</a>
+      <a href="/en/privacy">Privacy Notice</a>
     </div>
+
   </div>
 </footer>
 <a class="wa-float" href="https://wa.me/905468258035?text=Hello%2C%20I%20am%20contacting%20you%20via%20your%20website." target="_blank" rel="noopener" aria-label="Message us on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8.2 8.2 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.5 13.5 0 0 0 5.2 4.6c1.9.8 2.7.9 3.6.7a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.3zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.8L.1 24l6.4-1.7A11.8 11.8 0 0 0 24 12a11.7 11.7 0 0 0-3.6-8.4z"/></svg></a>
-<script src="/assets/js/main.js?v=a2f6d6204b" defer></script>
+<script src="/assets/js/main.js?v=e8c7390cb9" defer></script>
 </body>
 </html>

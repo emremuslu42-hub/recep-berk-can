@@ -274,5 +274,21 @@
     }
   }
 
+  // Harita: yalnızca ziyaretçi isterse Google Haritalar'dan yüklenir (çerez yok)
+  document.querySelectorAll("[data-map-load]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var box = btn.closest("[data-map-src]");
+      if (!box) return;
+      var iframe = document.createElement("iframe");
+      iframe.src = box.getAttribute("data-map-src");
+      iframe.title = box.getAttribute("data-map-title") || "";
+      iframe.loading = "lazy";
+      iframe.referrerPolicy = "no-referrer-when-downgrade";
+      box.classList.remove("map-box--consent");
+      box.innerHTML = "";
+      box.appendChild(iframe);
+    });
+  });
+
   document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();

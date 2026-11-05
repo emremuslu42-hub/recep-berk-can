@@ -98,6 +98,18 @@ powershell -ExecutionPolicy Bypass -File C:\bsmmekanik\deploy\setup-form.ps1
 Ayarlar `C:\bsmmekanik-key\form.json` (yalnızca Yönetici/SYSTEM), kayıtlar `C:\bsmmekanik-key\form.log`.
 WhatsApp düğmesi Mert'in cep numarasına bağlıdır (`content.py` → `whatsapp`).
 
+## Yasal (KVKK, TTK 1524)
+
+- `/kvkk` ve `/en/privacy`: KVKK Aydınlatma Metni (veri sorumlusu, veri kategorileri, amaçlar, hukuki sebepler,
+  yurt içi/yurt dışı aktarım — e-posta altyapısı Google Workspace ve GoDaddy, saklama süreleri, çerezler, md. 11 hakları, başvuru).
+  Metin `src/build.py` → `privacy_sections()`; güncelleme tarihi `PRIVACY_UPDATED`.
+- Form onay kutusu: "Aydınlatma Metni’ni okudum" (açık rıza ile birleştirilmez).
+- Site çerez kullanmaz; iletişim sayfasındaki Google Haritası yalnızca "Haritayı göster" ile yüklenir.
+- Form alıcının kayıtlarında (`form.log`) e-posta ve IP adresleri maskelenir.
+- **Bilgi Toplumu Hizmetleri (TTK md. 1524):** `src/content.py` → `trade_registry`, `mersis`, `tax_office`, `tax_no`.
+  Doldurulunca footer'da ve KVKK sayfasında otomatik görünür; boşken gösterilmez. **Firmadan bekleniyor.**
+- Öneri: metinlerin bir avukat tarafından gözden geçirilmesi; firma ile barındırma sağlayıcısı arasında veri işleme sözleşmesi.
+
 ## Kendi sunucunda (VDS) yayın
 
 `deploy/` klasörü:

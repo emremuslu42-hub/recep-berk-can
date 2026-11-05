@@ -4,6 +4,11 @@ COMPANY = {
     "short": "BSM Mekanik",
     "legal": "BSM Mekanik Mühendislik İnşaat Sanayi ve Ticaret Limited Şirketi",
     "founded": 2021,
+    # Bilgi Toplumu Hizmetleri (TTK md. 1524) — firmadan gelince doldurulacak; boş olanlar sitede gösterilmez
+    "trade_registry": "",      # ör. "İstanbul Ticaret Sicili Müdürlüğü — 123456"
+    "mersis": "",              # 16 haneli MERSİS numarası
+    "tax_office": "",          # ör. "Kozyatağı Vergi Dairesi"
+    "tax_no": "",              # 10 haneli vergi numarası
     "address": "Altıntepe Mah. İstasyon Yolu Sok. No:3/1",
     "city": "Maltepe / İstanbul",
     "office_phone": "+90 (216) 706 14 01",

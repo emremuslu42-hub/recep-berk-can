@@ -46,6 +46,7 @@ SLUG = {
     "services": {"tr": "/hizmetler", "en": "/en/services"},
     "refs": {"tr": "/referanslar", "en": "/en/projects"},
     "contact": {"tr": "/iletisim", "en": "/en/contact"},
+    "privacy": {"tr": "/kvkk", "en": "/en/privacy"},
 }
 NAV = ["home", "about", "services", "refs", "contact"]
 
@@ -340,6 +341,34 @@ def cta(lang):
 '''
 
 
+COMPANY_INFO_LABELS = {
+    "tr": {"trade_registry": "Ticaret Sicil", "mersis": "MERSİS No", "tax": "Vergi Dairesi / No"},
+    "en": {"trade_registry": "Trade Registry", "mersis": "MERSIS No", "tax": "Tax Office / No"},
+}
+
+
+def company_info(lang):
+    """Bilgi Toplumu Hizmetleri (TTK 1524) bilgileri; yalnızca doldurulmuş olanlar."""
+    L = COMPANY_INFO_LABELS[lang]
+    items = []
+    if C.get("trade_registry"):
+        items.append((L["trade_registry"], C["trade_registry"]))
+    if C.get("mersis"):
+        items.append((L["mersis"], C["mersis"]))
+    tax = " / ".join(x for x in (C.get("tax_office"), C.get("tax_no")) if x)
+    if tax:
+        items.append((L["tax"], tax))
+    return items
+
+
+def company_info_line(lang):
+    items = company_info(lang)
+    if not items:
+        return ""
+    text = " · ".join(f"{k}: {v}" for k, v in items)
+    return f'    <p class="footer-legal">{escape(C["legal"])} · {escape(text)}</p>\n'
+
+
 def footer(lang):
     u = UI[lang]
     services = "\n".join(f'          <li><a href="{path(None, lang, s)}">{s[lang]["name"]}</a></li>' for s in SERVICES)
@@ -378,8 +407,9 @@ def footer(lang):
     </div>
     <div class="footer-bottom">
       <span>© <span data-year>{datetime.date.today().year}</span> {C["legal"]}. {u["rights"]}</span>
-      <a href="{path("contact", lang)}#kvkk">{u["kvkk"]}</a>
+      <a href="{path("privacy", lang)}">{u["kvkk"]}</a>
     </div>
+{company_info_line(lang)}
   </div>
 </footer>
 <a class="wa-float" href="{wa_url}" target="_blank" rel="noopener" aria-label="{u["wa"]}">{I["whatsapp"]}</a>
@@ -981,19 +1011,17 @@ CONT = {
            "f": {"name": "Ad Soyad", "company": "Firma", "email": "E-posta", "phone": "Telefon", "topic": "Hizmet", "msg": "Mesajınız",
                  "msg_ph": "Proje türü, alan (m²), konum ve talep ettiğiniz hizmetleri yazmanız değerlendirmemizi hızlandırır.",
                  "choose": "Seçiniz", "other": "Diğer",
-                 "consent": "Kişisel verilerimin talebime dönüş yapılması amacıyla işlenmesini kabul ediyorum (<a href=\"#kvkk\">KVKK Aydınlatma Metni</a>).",
+                 "consent": "<a href=\"/kvkk\" target=\"_blank\" rel=\"noopener\">KVKK Aydınlatma Metni</a>’ni okudum.",
                  "send": "Gönder", "subject": "Web sitesi talebi", "sending": "Gönderiliyor…",
                  "success": "Teşekkürler, mesajınız iletildi. En kısa sürede size dönüş yapacağız.",
                  "error": "Mesajınız şu anda gönderilemedi. Lütfen {mail} adresine e-posta gönderin ya da {phone} numaralı telefondan bize ulaşın.",
                  "rate": "Kısa sürede çok fazla gönderim yapıldı. Lütfen birkaç dakika sonra tekrar deneyin.",
                  "invalid": "Lütfen işaretli alanları kontrol edin.", "hp": "Bu alanı boş bırakın"},
            "map": "BSM Mekanik ofis konumu", "directions": "Yol tarifi al",
-           "kvkk_h": "KVKK Aydınlatma Metni",
-           "kvkk": [
-               f"Veri sorumlusu {C['legal']} (“BSM Mekanik”) olarak, iletişim formu, e-posta, telefon veya WhatsApp üzerinden ilettiğiniz ad-soyad, firma, e-posta, telefon ve mesaj içeriği bilgilerinizi; yalnızca talebinize dönüş yapmak, teklif hazırlamak ve sizinle iletişim kurmak amacıyla, 6698 sayılı Kişisel Verilerin Korunması Kanunu’nun 5. maddesi kapsamında açık rızanıza ve bir sözleşmenin kurulmasıyla doğrudan ilgili olmasına dayanarak işliyoruz.",
-               "İletişim formundan gönderilen mesajlar, web sitesi hizmet sağlayıcımızın e-posta altyapısı (Google Workspace) aracılığıyla tarafımıza e-posta olarak iletilir. Kişisel verileriniz, yasal yükümlülükler dışında üçüncü kişilerle paylaşılmaz ve işleme amacının gerektirdiği süre boyunca saklanır. Web sitemiz reklam veya takip amaçlı çerez kullanmaz; iletişim sayfasındaki harita Google Maps tarafından sağlanır ve Google’ın gizlilik politikasına tabidir.",
-               f"KVKK’nın 11. maddesi uyarınca verilerinizin işlenip işlenmediğini öğrenme, düzeltilmesini veya silinmesini isteme gibi haklarınızı kullanmak için {C['people'][0]['email']} adresine yazabilirsiniz.",
-           ]},
+           "map_note": "Harita, düğmeye bastığınızda Google Haritalar’dan yüklenir. Bu durumda Google kendi çerezlerini kullanabilir.",
+           "map_btn": "Haritayı göster", "map_open": "Google Haritalar’da aç",
+           "privacy_short": "Formda paylaştığınız bilgiler yalnızca talebinize dönüş yapmak amacıyla işlenir. Ayrıntılar için",
+           "kvkk_h": "KVKK Aydınlatma Metni",},
     "en": {"title": "Contact | BSM Mechanical — Maltepe, Istanbul",
            "desc": "Contact BSM Mechanical in Maltepe, Istanbul: +90 (216) 706 14 01, mert@bsmmechanical.com. Get in touch for quotations and site surveys.",
            "h1": "Let's talk about your project", "lead": "Get in touch for quotations, site surveys or technical advice, and we'll respond as soon as possible.",
@@ -1002,19 +1030,17 @@ CONT = {
            "f": {"name": "Full name", "company": "Company", "email": "Email", "phone": "Phone", "topic": "Service", "msg": "Message",
                  "msg_ph": "Tell us the project type, floor area (m²), location and services required so we can respond faster.",
                  "choose": "Select", "other": "Other",
-                 "consent": "I consent to my personal data being processed in order to respond to my request (<a href=\"#kvkk\">Privacy Notice</a>).",
+                 "consent": "I have read the <a href=\"/en/privacy\" target=\"_blank\" rel=\"noopener\">Privacy Notice</a>.",
                  "send": "Send", "subject": "Website enquiry", "sending": "Sending…",
                  "success": "Thank you, your message has been sent. We will get back to you shortly.",
                  "error": "Your message could not be sent right now. Please email {mail} or call us on {phone}.",
                  "rate": "Too many messages in a short time. Please try again in a few minutes.",
                  "invalid": "Please check the highlighted fields.", "hp": "Leave this field empty"},
            "map": "BSM Mechanical office location", "directions": "Get directions",
-           "kvkk_h": "Privacy Notice",
-           "kvkk": [
-               f"As data controller, {C['legal']} (“BSM Mechanical”) processes the name, company, email, phone and message details you send via the contact form, email, phone or WhatsApp solely to respond to your request, prepare proposals and communicate with you, under Article 5 of Turkish Personal Data Protection Law No. 6698, based on your explicit consent and as directly related to establishing a contract.",
-               "Messages sent through the contact form are delivered to us by email via our website service provider’s email infrastructure (Google Workspace). Your personal data is not shared with third parties except where required by law, and is kept only as long as the purpose requires. Our website does not use advertising or tracking cookies; the map on the contact page is provided by Google Maps and subject to Google’s privacy policy.",
-               f"To exercise your rights under Article 11 of the Law, such as learning whether your data is processed or requesting its correction or deletion, please write to {C['people'][0]['email']}.",
-           ]},
+           "map_note": "The map loads from Google Maps only when you press the button. Google may then use its own cookies.",
+           "map_btn": "Show map", "map_open": "Open in Google Maps",
+           "privacy_short": "The information you share in the form is used only to respond to your request. For details, see our",
+           "kvkk_h": "Privacy Notice",},
 }
 
 
@@ -1030,7 +1056,6 @@ def contact(lang):
     mq = quote(C["map_query"])
     phones = "".join(f'<span class="label">{t["mobile"]}</span><a href="tel:{p["tel"]}">{p["phone"]}</a>' for p in C["people"])
     mails = "".join(f'<span class="label">{p["name"]}</span><a href="mailto:{p["email"]}">{p["email"]}</a>' for p in C["people"])
-    kvkk = "".join(f'<p class="text-muted" style="max-width:90ch;margin-top:12px">{p}</p>' for p in t["kvkk"])
     page = {"@type": "ContactPage", "url": absolute(paths[lang], lang), "name": t["title"], "inLanguage": lang, "about": {"@id": ORG_ID}}
     return head(lang, t["title"], t["desc"], paths, ld(page, org_schema(), breadcrumb_schema(crumbs, lang))) + header(lang, "contact", paths) \
         + page_hero(lang, t["h1"], t["lead"], "/assets/img/hizmet/vrf-yangin.webp", crumbs) + f'''<main id="icerik">
@@ -1062,20 +1087,175 @@ def contact(lang):
         <div><button class="btn btn--primary" type="submit">{f["send"]} {I["arrow"]}</button></div>
         <p class="form-status" role="status" aria-live="polite"></p>
       </form>
-      <div class="map-box reveal reveal-delay-1">
-        <iframe title="{t["map"]}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q={mq}&amp;z=16&amp;hl={lang}&amp;output=embed"></iframe>
+      <div class="map-box map-box--consent reveal reveal-delay-1" data-map-src="https://maps.google.com/maps?q={mq}&amp;z=16&amp;hl={lang}&amp;output=embed" data-map-title="{t["map"]}">
+        <div class="map-placeholder">
+          {I["pin"]}
+          <p class="map-address"><strong>{C["address"]}</strong><br>{C["city"]}</p>
+          <p class="map-note">{t["map_note"]}</p>
+          <div class="map-actions">
+            <button class="btn btn--primary" type="button" data-map-load>{t["map_btn"]}</button>
+            <a class="btn btn--outline" href="https://www.google.com/maps/search/?api=1&amp;query={mq}" target="_blank" rel="noopener">{t["map_open"]}</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 <section class="section--tight section--bg" id="kvkk">
   <div class="container">
-    <h2 class="h-md" style="margin-bottom:6px">{t["kvkk_h"]}</h2>
-    {kvkk}
+    <p class="text-muted" style="max-width:90ch">{t["privacy_short"]} <a class="link-arrow" href="{path("privacy", lang)}">{t["kvkk_h"]} {I["arrow"]}</a></p>
   </div>
 </section>
 </main>
 ''' + footer(lang)
+
+
+# ================================================================ KVKK AYDINLATMA METNİ
+PRIVACY_UPDATED = "5 Kasım 2026"
+PRIVACY_UPDATED_EN = "5 November 2026"
+
+
+def privacy_sections(lang):
+    mail = C["people"][0]["email"]
+    addr = f'{C["address"]}, {C["city"]}'
+    info = "".join(f"<li><strong>{escape(k)}:</strong> {escape(v)}</li>" for k, v in company_info(lang))
+    if lang == "tr":
+        return [
+            ("Veri sorumlusu",
+             f"<p>6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) uyarınca kişisel verileriniz, veri sorumlusu sıfatıyla "
+             f"<strong>{C['legal']}</strong> (“BSM Mekanik”) tarafından aşağıda açıklanan kapsamda işlenmektedir.</p>"
+             f"<ul><li><strong>Adres:</strong> {addr}</li><li><strong>E-posta:</strong> <a href=\"mailto:{mail}\">{mail}</a></li>"
+             f"<li><strong>Telefon:</strong> {C['office_phone']}</li>{info}</ul>"),
+            ("İşlenen kişisel veriler",
+             "<ul><li><strong>Kimlik:</strong> ad, soyad</li>"
+             "<li><strong>İletişim:</strong> e-posta adresi, telefon numarası</li>"
+             "<li><strong>Müşteri işlem:</strong> firma adı, talep edilen hizmet, mesaj içeriği</li>"
+             "<li><strong>İşlem güvenliği:</strong> IP adresi, gönderim zamanı, sunucu erişim kayıtları</li></ul>"),
+            ("Kişisel verilerin işlenme amaçları",
+             "<ul><li>Teklif, keşif ve bilgi taleplerinizin değerlendirilmesi ve yanıtlanması</li>"
+             "<li>Teklif hazırlanması ve sözleşme öncesi süreçlerin yürütülmesi</li>"
+             "<li>Sizinle iletişim kurulması</li>"
+             "<li>Bilgi güvenliği süreçlerinin yürütülmesi, istenmeyen ileti ve kötüye kullanımın önlenmesi</li>"
+             "<li>Hukuki yükümlülüklerin yerine getirilmesi ve yetkili kurumların taleplerinin karşılanması</li></ul>"),
+            ("Toplama yöntemi ve hukuki sebepler",
+             "<p>Kişisel verileriniz; web sitemizdeki iletişim formu, e-posta, telefon ve WhatsApp aracılığıyla, kısmen otomatik yollarla toplanır. "
+             "Verileriniz KVKK’nın 5. maddesinin 2. fıkrasında yer alan şu hukuki sebeplere dayanılarak işlenir:</p>"
+             "<ul><li>Bir sözleşmenin kurulmasıyla doğrudan ilgili olması (md. 5/2-c): teklif ve bilgi talepleri</li>"
+             "<li>Veri sorumlusunun hukuki yükümlülüğünü yerine getirebilmesi (md. 5/2-ç)</li>"
+             "<li>İlgili kişinin temel hak ve özgürlüklerine zarar vermemek kaydıyla veri sorumlusunun meşru menfaati (md. 5/2-f): bilgi güvenliği ve kötüye kullanımın önlenmesi</li></ul>"),
+            ("Kişisel verilerin aktarılması",
+             "<p><strong>Yurt içi:</strong> Kişisel verileriniz, yalnızca hizmetin sunulması amacıyla web sitemizin barındırma ve teknik hizmetini sağlayan "
+             "hizmet sağlayıcımıza (veri işleyen) ve hukuken yetkili kamu kurum ve kuruluşlarına talep halinde aktarılabilir.</p>"
+             "<p><strong>Yurt dışı:</strong> Web sitemiz ve iletişim formu altyapısı Türkiye’deki sunucularda barındırılır. Ancak iletişim formu aracılığıyla "
+             "gönderilen mesajlar ve tarafımızla yapılan e-posta yazışmaları, kullanılan e-posta hizmet sağlayıcılarının (Google LLC – Google Workspace, "
+             "GoDaddy Inc.) yurt dışında bulunan sunucuları üzerinden iletilir ve saklanır. WhatsApp üzerinden iletişime geçmeniz halinde mesajlarınız "
+             "WhatsApp (Meta Platforms) altyapısı üzerinden iletilir. Bu aktarımlar, talebinizin yanıtlanması amacıyla sınırlı olarak ve KVKK’nın "
+             "9. maddesinde öngörülen şartlar çerçevesinde gerçekleştirilir.</p>"),
+            ("Saklama süreleri",
+             "<p>İletişim formu mesajları ve e-posta yazışmaları, talebinize ilişkin iletişim sona erdikten sonra en fazla 2 yıl; sizinle sözleşme "
+             "ilişkisi kurulması halinde ilgili mevzuatta öngörülen süreler boyunca saklanır. Form altyapısının sunucu kayıtlarında e-posta ve IP "
+             "adresleri maskelenmiş olarak tutulur. Saklama süresi sona eren veriler silinir, yok edilir veya anonim hale getirilir.</p>"),
+            ("Çerezler",
+             "<p>Web sitemiz reklam, analiz veya takip amaçlı çerez kullanmaz. İletişim sayfasındaki harita, yalnızca “Haritayı göster” düğmesine "
+             "bastığınızda Google Haritalar’dan yüklenir; bu durumda Google, kendi gizlilik politikası kapsamında çerez kullanabilir.</p>"),
+            ("KVKK kapsamındaki haklarınız",
+             "<p>KVKK’nın 11. maddesi uyarınca veri sorumlusuna başvurarak:</p>"
+             "<ul><li>Kişisel verilerinizin işlenip işlenmediğini öğrenme,</li>"
+             "<li>İşlenmişse buna ilişkin bilgi talep etme,</li>"
+             "<li>İşlenme amacını ve bunların amacına uygun kullanılıp kullanılmadığını öğrenme,</li>"
+             "<li>Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme,</li>"
+             "<li>Eksik veya yanlış işlenmiş olması halinde düzeltilmesini isteme,</li>"
+             "<li>KVKK’nın 7. maddesindeki şartlar çerçevesinde silinmesini veya yok edilmesini isteme,</li>"
+             "<li>Düzeltme, silme ve yok etme işlemlerinin, verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme,</li>"
+             "<li>İşlenen verilerin münhasıran otomatik sistemler vasıtasıyla analiz edilmesi suretiyle aleyhinize bir sonucun ortaya çıkmasına itiraz etme,</li>"
+             "<li>Kanuna aykırı olarak işlenmesi sebebiyle zarara uğramanız halinde zararın giderilmesini talep etme</li></ul>"
+             "<p>haklarına sahipsiniz.</p>"),
+            ("Başvuru",
+             f"<p>Haklarınıza ilişkin taleplerinizi, Veri Sorumlusuna Başvuru Usul ve Esasları Hakkında Tebliğ’e uygun olarak, yazılı olarak "
+             f"<strong>{addr}</strong> adresine iletebilir veya <a href=\"mailto:{mail}\">{mail}</a> adresine e-posta gönderebilirsiniz. "
+             "Başvurunuz, talebin niteliğine göre en geç otuz gün içinde ücretsiz olarak sonuçlandırılır; işlemin ayrıca bir maliyet gerektirmesi halinde "
+             "Kişisel Verileri Koruma Kurulu tarafından belirlenen tarifedeki ücret alınabilir.</p>"),
+        ]
+    return [
+        ("Data controller",
+         f"<p>Under Turkish Personal Data Protection Law No. 6698 (“KVKK”), your personal data is processed by <strong>{C['legal']}</strong> "
+         f"(“BSM Mechanical”) as data controller, as described below.</p>"
+         f"<ul><li><strong>Address:</strong> {addr}</li><li><strong>Email:</strong> <a href=\"mailto:{mail}\">{mail}</a></li>"
+         f"<li><strong>Phone:</strong> {C['office_phone']}</li>{info}</ul>"),
+        ("Personal data we process",
+         "<ul><li><strong>Identity:</strong> first and last name</li>"
+         "<li><strong>Contact:</strong> email address, phone number</li>"
+         "<li><strong>Enquiry details:</strong> company name, service requested, message content</li>"
+         "<li><strong>Security:</strong> IP address, time of submission, server access logs</li></ul>"),
+        ("Purposes of processing",
+         "<ul><li>Reviewing and responding to your quotation, site survey and information requests</li>"
+         "<li>Preparing quotations and carrying out pre-contractual steps</li>"
+         "<li>Communicating with you</li>"
+         "<li>Information security, and preventing spam and misuse</li>"
+         "<li>Complying with legal obligations and requests from competent authorities</li></ul>"),
+        ("How we collect data and legal bases",
+         "<p>We collect your personal data partly by automated means through the contact form on our website, email, phone and WhatsApp. "
+         "We process it on the following legal bases under Article 5(2) of the KVKK:</p>"
+         "<ul><li>Processing is directly related to establishing a contract (Art. 5/2-c): quotation and information requests</li>"
+         "<li>Compliance with our legal obligations (Art. 5/2-ç)</li>"
+         "<li>Our legitimate interests, provided they do not harm your fundamental rights and freedoms (Art. 5/2-f): information security and preventing misuse</li></ul>"),
+        ("Transfers of personal data",
+         "<p><strong>Within Türkiye:</strong> Your personal data may be shared only with the service provider that hosts and maintains our website "
+         "(as data processor), for the purpose of providing that service, and with competent public authorities upon lawful request.</p>"
+         "<p><strong>Outside Türkiye:</strong> Our website and contact form infrastructure are hosted on servers in Türkiye. However, messages sent via the "
+         "contact form and email correspondence with us are transmitted and stored on servers outside Türkiye operated by our email service providers "
+         "(Google LLC – Google Workspace, GoDaddy Inc.). If you contact us via WhatsApp, your messages are transmitted through WhatsApp (Meta Platforms) "
+         "infrastructure. These transfers are limited to responding to your request and are carried out within the conditions set out in Article 9 of the KVKK.</p>"),
+        ("Retention",
+         "<p>Contact form messages and email correspondence are kept for no longer than 2 years after communication about your request ends, or, if a "
+         "contract is established, for the periods required by applicable law. Email and IP addresses in the contact form server logs are stored in masked "
+         "form. Data whose retention period has expired is deleted, destroyed or anonymised.</p>"),
+        ("Cookies",
+         "<p>Our website does not use advertising, analytics or tracking cookies. The map on the contact page is loaded from Google Maps only when you press "
+         "“Show map”; Google may then use cookies under its own privacy policy.</p>"),
+        ("Your rights",
+         "<p>Under Article 11 of the KVKK, you have the right to apply to the data controller to:</p>"
+         "<ul><li>learn whether your personal data is processed;</li><li>request information if it has been processed;</li>"
+         "<li>learn the purpose of processing and whether data is used in line with that purpose;</li>"
+         "<li>know the third parties in Türkiye or abroad to whom data is transferred;</li>"
+         "<li>request correction of incomplete or inaccurate data;</li>"
+         "<li>request deletion or destruction of data under the conditions of Article 7 of the KVKK;</li>"
+         "<li>request that corrections, deletions or destructions be notified to third parties to whom data was transferred;</li>"
+         "<li>object to a result against you arising from analysis of data exclusively by automated systems;</li>"
+         "<li>claim compensation for damage arising from unlawful processing.</li></ul>"),
+        ("How to apply",
+         f"<p>You may submit requests regarding your rights in writing to <strong>{addr}</strong> or by email to <a href=\"mailto:{mail}\">{mail}</a>, "
+         "in accordance with the Communiqué on the Procedures and Principles of Application to the Data Controller. Requests are resolved free of charge "
+         "within thirty days at the latest, depending on their nature; if the process involves an additional cost, the fee set by the Personal Data "
+         "Protection Board may be charged.</p>"),
+    ]
+
+
+PRIV = {
+    "tr": {"title": "KVKK Aydınlatma Metni | BSM Mekanik",
+           "desc": "BSM Mekanik Mühendislik’in 6698 sayılı KVKK kapsamında kişisel verilerin işlenmesine ilişkin aydınlatma metni.",
+           "h1": "KVKK Aydınlatma Metni",
+           "lead": "6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında kişisel verilerinizin işlenmesine ilişkin bilgilendirme",
+           "updated": "Son güncelleme: " + PRIVACY_UPDATED},
+    "en": {"title": "Privacy Notice | BSM Mechanical",
+           "desc": "BSM Mechanical’s privacy notice on the processing of personal data under Turkish Personal Data Protection Law No. 6698 (KVKK).",
+           "h1": "Privacy Notice",
+           "lead": "How we process your personal data under Turkish Personal Data Protection Law No. 6698 (KVKK)",
+           "updated": "Last updated: " + PRIVACY_UPDATED_EN},
+}
+
+
+def privacy(lang):
+    t = PRIV[lang]
+    u = UI[lang]
+    paths = {l: path("privacy", l) for l in LANGS}
+    crumbs = [(u["nav"]["home"], path("home", lang)), (t["h1"], paths[lang])]
+    body = "".join(f'<section class="legal-section"><h2>{i + 1}. {h}</h2>{html}</section>'
+                   for i, (h, html) in enumerate(privacy_sections(lang)))
+    main = (f'<main id="icerik">\n<section class="section">\n  <div class="container legal">\n{body}\n'
+            f'    <p class="text-muted legal-updated">{t["updated"]}</p>\n  </div>\n</section>\n</main>\n')
+    return (head(lang, t["title"], t["desc"], paths, ld(breadcrumb_schema(crumbs, lang))) + header(lang, None, paths)
+            + page_hero(lang, t["h1"], t["lead"], "/assets/img/hizmet/projelendirme.webp", crumbs) + main + footer(lang))
 
 
 # ================================================================ 404 / sitemap / manifest
@@ -1140,7 +1320,8 @@ def write(p, html):
 
 def main():
     all_paths = []
-    for page, fn in (("home", home), ("about", about), ("services", services), ("refs", refs), ("contact", contact)):
+    for page, fn in (("home", home), ("about", about), ("services", services), ("refs", refs), ("contact", contact),
+                     ("privacy", privacy)):
         paths = {l: path(page, l) for l in LANGS}
         all_paths.append(paths)
         for l in LANGS:

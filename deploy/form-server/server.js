@@ -42,6 +42,19 @@ function loadConfig() {
 
 function log(...a) { console.log(new Date().toISOString(), ...a); }
 
+// Kayıtlarda tam kişisel veri tutulmaz (KVKK: veri minimizasyonu)
+function maskEmail(e) {
+  const [u, d] = String(e || "").split("@");
+  if (!d) return "-";
+  return `${u.slice(0, 1)}***@${d}`;
+}
+function maskIp(ip) {
+  ip = String(ip || "").replace(/^::ffff:/, "");
+  if (ip.includes(".")) return ip.split(".").slice(0, 3).concat("x").join(".");
+  if (ip.includes(":")) return ip.split(":").slice(0, 3).join(":") + ":x";
+  return "-";
+}
+
 // ------------------------------------------------------------------ SMTP (TLS, AUTH LOGIN)
 function smtpSend(cfg, { replyTo, subject, text }) {
   return new Promise((resolve, reject) => {
@@ -152,7 +165,7 @@ function mailText(v, ip) {
     "—",
     `Gönderim : ${new Date().toLocaleString("tr-TR", { timeZone: "Europe/Istanbul" })}`,
     `Sayfa    : ${v.page || "-"}`,
-    `IP       : ${ip}`,
+    `IP       : ${maskIp(ip)}`,
     "Bu e-postayı yanıtladığınızda yanıtınız doğrudan formu dolduran kişiye gider.",
   ].join("\n");
 }
@@ -196,8 +209,8 @@ function start(cfg) {
     } catch (e) { return send(res, e.status || 400, { ok: false, error: e.status ? "size" : "body" }); }
 
     // Bot tuzağı: görünmeyen alan doluysa sessizce başarılı say
-    if (raw.website) { log("tuzak alanı dolu, atlandı", ip); return send(res, 200, { ok: true }); }
-    if (rateLimited(ip)) { log("hız sınırı", ip); return send(res, 429, { ok: false, error: "rate" }); }
+    if (raw.website) { log("tuzak alanı dolu, atlandı", maskIp(ip)); return send(res, 200, { ok: true }); }
+    if (rateLimited(ip)) { log("hız sınırı", maskIp(ip)); return send(res, 429, { ok: false, error: "rate" }); }
 
     const v = validate(raw);
     if (v.errors.length) return send(res, 422, { ok: false, error: "fields", fields: v.errors });
@@ -205,7 +218,7 @@ function start(cfg) {
     const subject = `Web sitesi teklif talebi — ${v.f.konu || "Genel"} — ${v.f.ad}`;
     try {
       await smtpSend(cfg, { replyTo: v.f.eposta, subject, text: mailText(v, ip) });
-      log("gönderildi", ip, v.f.eposta);
+      log("gönderildi", maskIp(ip), maskEmail(v.f.eposta));
       send(res, 200, { ok: true });
     } catch (e) {
       log("SMTP HATASI", e.message);

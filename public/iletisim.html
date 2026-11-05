@@ -29,7 +29,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin-ext-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/style.css?v=38acfea951">
+<link rel="stylesheet" href="/assets/css/style.css?v=ffe4bcf328">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "ContactPage", "url": "https://www.bsmmekanik.com/iletisim", "name": "İletişim | BSM Mekanik — Maltepe, İstanbul", "inLanguage": "tr", "about": {"@id": "https://www.bsmmekanik.com/#organizasyon"}}, {"@type": "HVACBusiness", "@id": "https://www.bsmmekanik.com/#organizasyon", "name": "BSM Mekanik Mühendislik İnşaat Sanayi ve Ticaret Limited Şirketi", "alternateName": ["BSM Mekanik", "BSM Mechanical"], "url": "https://www.bsmmekanik.com/", "logo": "https://www.bsmmekanik.com/assets/img/logo-512.png", "image": "https://www.bsmmekanik.com/assets/img/og-tr.jpg", "description": "Mekanik tesisat, yangın söndürme sistemleri, HVAC, havalandırma, mühendislik ve anahtar teslim taahhüt hizmetleri.", "foundingDate": "2021", "telephone": "+902167061401", "email": "mert@bsmmechanical.com", "address": {"@type": "PostalAddress", "streetAddress": "Altıntepe Mah. İstasyon Yolu Sok. No:3/1", "addressLocality": "Maltepe", "addressRegion": "İstanbul", "addressCountry": "TR"}, "areaServed": {"@type": "Country", "name": "Türkiye"}, "contactPoint": [{"@type": "ContactPoint", "telephone": "+905468258035", "email": "mert@bsmmechanical.com", "contactType": "sales", "name": "Mert BALCI", "availableLanguage": ["Turkish", "English"]}], "knowsAbout": ["Mekanik Tesisat", "Yangın Söndürme Sistemleri", "HVAC ve İklimlendirme", "Havalandırma Sistemleri", "Mühendislik ve Projelendirme", "Mekanik Taahhüt ve Anahtar Teslim", "Elektrik ve Otomasyon"], "sameAs": ["https://www.bsmmechanical.com/"]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://www.bsmmekanik.com/"}, {"@type": "ListItem", "position": 2, "name": "İletişim", "item": "https://www.bsmmekanik.com/iletisim"}]}]}</script>
 </head>
 <body>
@@ -98,21 +98,28 @@
         </div>
         <div class="field"><label for="konu">Hizmet</label><select id="konu" name="konu"><option value="">Seçiniz</option><option data-key="mekanik" value="Mekanik Tesisat">Mekanik Tesisat</option><option data-key="yangin" value="Yangın Söndürme Sistemleri">Yangın Söndürme Sistemleri</option><option data-key="hvac" value="HVAC ve İklimlendirme">HVAC ve İklimlendirme</option><option data-key="havalandirma" value="Havalandırma Sistemleri">Havalandırma Sistemleri</option><option data-key="proje" value="Mühendislik ve Projelendirme">Mühendislik ve Projelendirme</option><option data-key="taahhut" value="Mekanik Taahhüt ve Anahtar Teslim">Mekanik Taahhüt ve Anahtar Teslim</option><option data-key="elektrik" value="Elektrik ve Otomasyon">Elektrik ve Otomasyon</option><option value="Diğer">Diğer</option></select></div>
         <div class="field"><label for="mesaj">Mesajınız *</label><textarea id="mesaj" name="mesaj" placeholder="Proje türü, alan (m²), konum ve talep ettiğiniz hizmetleri yazmanız değerlendirmemizi hızlandırır." required></textarea></div>
-        <label class="form-consent"><input type="checkbox" name="kvkk" required><span>Kişisel verilerimin talebime dönüş yapılması amacıyla işlenmesini kabul ediyorum (<a href="#kvkk">KVKK Aydınlatma Metni</a>). *</span></label>
+        <label class="form-consent"><input type="checkbox" name="kvkk" required><span><a href="/kvkk" target="_blank" rel="noopener">KVKK Aydınlatma Metni</a>’ni okudum. *</span></label>
         <div class="hp" aria-hidden="true"><label for="website">Bu alanı boş bırakın</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
         <div><button class="btn btn--primary" type="submit">Gönder <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
         <p class="form-status" role="status" aria-live="polite"></p>
       </form>
-      <div class="map-box reveal reveal-delay-1">
-        <iframe title="BSM Mekanik ofis konumu" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Alt%C4%B1ntepe%20Mah.%20%C4%B0stasyon%20Yolu%20Sok.%20No%3A3%20Maltepe%20%C4%B0stanbul&amp;z=16&amp;hl=tr&amp;output=embed"></iframe>
+      <div class="map-box map-box--consent reveal reveal-delay-1" data-map-src="https://maps.google.com/maps?q=Alt%C4%B1ntepe%20Mah.%20%C4%B0stasyon%20Yolu%20Sok.%20No%3A3%20Maltepe%20%C4%B0stanbul&amp;z=16&amp;hl=tr&amp;output=embed" data-map-title="BSM Mekanik ofis konumu">
+        <div class="map-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <p class="map-address"><strong>Altıntepe Mah. İstasyon Yolu Sok. No:3/1</strong><br>Maltepe / İstanbul</p>
+          <p class="map-note">Harita, düğmeye bastığınızda Google Haritalar’dan yüklenir. Bu durumda Google kendi çerezlerini kullanabilir.</p>
+          <div class="map-actions">
+            <button class="btn btn--primary" type="button" data-map-load>Haritayı göster</button>
+            <a class="btn btn--outline" href="https://www.google.com/maps/search/?api=1&amp;query=Alt%C4%B1ntepe%20Mah.%20%C4%B0stasyon%20Yolu%20Sok.%20No%3A3%20Maltepe%20%C4%B0stanbul" target="_blank" rel="noopener">Google Haritalar’da aç</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 <section class="section--tight section--bg" id="kvkk">
   <div class="container">
-    <h2 class="h-md" style="margin-bottom:6px">KVKK Aydınlatma Metni</h2>
-    <p class="text-muted" style="max-width:90ch;margin-top:12px">Veri sorumlusu BSM Mekanik Mühendislik İnşaat Sanayi ve Ticaret Limited Şirketi (“BSM Mekanik”) olarak, iletişim formu, e-posta, telefon veya WhatsApp üzerinden ilettiğiniz ad-soyad, firma, e-posta, telefon ve mesaj içeriği bilgilerinizi; yalnızca talebinize dönüş yapmak, teklif hazırlamak ve sizinle iletişim kurmak amacıyla, 6698 sayılı Kişisel Verilerin Korunması Kanunu’nun 5. maddesi kapsamında açık rızanıza ve bir sözleşmenin kurulmasıyla doğrudan ilgili olmasına dayanarak işliyoruz.</p><p class="text-muted" style="max-width:90ch;margin-top:12px">İletişim formundan gönderilen mesajlar, web sitesi hizmet sağlayıcımızın e-posta altyapısı (Google Workspace) aracılığıyla tarafımıza e-posta olarak iletilir. Kişisel verileriniz, yasal yükümlülükler dışında üçüncü kişilerle paylaşılmaz ve işleme amacının gerektirdiği süre boyunca saklanır. Web sitemiz reklam veya takip amaçlı çerez kullanmaz; iletişim sayfasındaki harita Google Maps tarafından sağlanır ve Google’ın gizlilik politikasına tabidir.</p><p class="text-muted" style="max-width:90ch;margin-top:12px">KVKK’nın 11. maddesi uyarınca verilerinizin işlenip işlenmediğini öğrenme, düzeltilmesini veya silinmesini isteme gibi haklarınızı kullanmak için mert@bsmmechanical.com adresine yazabilirsiniz.</p>
+    <p class="text-muted" style="max-width:90ch">Formda paylaştığınız bilgiler yalnızca talebinize dönüş yapmak amacıyla işlenir. Ayrıntılar için <a class="link-arrow" href="/kvkk">KVKK Aydınlatma Metni <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
   </div>
 </section>
 </main>
@@ -157,11 +164,12 @@
     </div>
     <div class="footer-bottom">
       <span>© <span data-year>2026</span> BSM Mekanik Mühendislik İnşaat Sanayi ve Ticaret Limited Şirketi. Tüm hakları saklıdır.</span>
-      <a href="/iletisim#kvkk">KVKK Aydınlatma Metni</a>
+      <a href="/kvkk">KVKK Aydınlatma Metni</a>
     </div>
+
   </div>
 </footer>
 <a class="wa-float" href="https://wa.me/905468258035?text=Merhaba%2C%20web%20siteniz%20%C3%BCzerinden%20ula%C5%9F%C4%B1yorum." target="_blank" rel="noopener" aria-label="WhatsApp ile yazın"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8.2 8.2 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.5 13.5 0 0 0 5.2 4.6c1.9.8 2.7.9 3.6.7a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.3zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.8L.1 24l6.4-1.7A11.8 11.8 0 0 0 24 12a11.7 11.7 0 0 0-3.6-8.4z"/></svg></a>
-<script src="/assets/js/main.js?v=a2f6d6204b" defer></script>
+<script src="/assets/js/main.js?v=e8c7390cb9" defer></script>
 </body>
 </html>

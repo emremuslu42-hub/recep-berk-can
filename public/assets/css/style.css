@@ -802,3 +802,24 @@ h1, h2, h3, h4 {
 .form-status.is-error { color: #b42318; }
 .form-status a { text-decoration: underline; }
 .form button[disabled] { opacity: 0.7; cursor: progress; }
+
+/* KVKK / yasal metin sayfası */
+.legal { max-width: 860px; }
+.legal-section + .legal-section { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--line); }
+.legal h2 { font-size: clamp(20px, 2vw, 24px); margin-bottom: 14px; }
+.legal p, .legal li { color: var(--text); font-size: 16px; }
+.legal p + p { margin-top: 12px; }
+.legal ul { display: grid; gap: 8px; margin: 12px 0; padding-left: 22px; list-style: disc; }
+.legal ul li::marker { color: var(--brand); }
+.legal a { color: var(--brand); text-decoration: underline; }
+.legal-updated { margin-top: 48px; font-size: 14px; }
+.footer-legal { margin: 0; padding: 0 0 26px; font-size: 12.5px; color: #7f8ba3; }
+
+/* İletişim: tıklayınca yüklenen harita */
+.map-box--consent { display: grid; place-items: center; }
+.map-placeholder { display: grid; justify-items: center; gap: 12px; max-width: 380px; padding: 40px 28px; text-align: center; }
+.map-placeholder > svg { width: 40px; height: 40px; color: var(--brand); }
+.map-address { color: var(--ink); line-height: 1.5; }
+.map-note { font-size: 13.5px; color: var(--muted); }
+.map-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 6px; }
+.map-actions .btn { height: 46px; padding: 0 20px; font-size: 14px; }
