@@ -11,7 +11,8 @@
 
 param(
     [string]$To = 'mert@bsmmechanical.com',
-    [string]$From = ''
+    [string]$Account = '',   # uygulama şifresinin ait olduğu Google Workspace hesabı
+    [string]$From = ''       # gönderen adresi (hesabın kendisi ya da onun takma adı, ör. bildirim@)
 )
 
 $ErrorActionPreference = 'Stop'
@@ -44,11 +45,15 @@ Write-Host "   node: $Node ($(& $Node -v))"
 
 # --- Gönderen hesap ve uygulama şifresi
 Say 'E-posta gönderim hesabı'
-if (-not $From) {
-    $From = Read-Host 'Gönderen Google Workspace hesabı [iletisim@nesakyazilim.com]'
-    if (-not $From) { $From = 'iletisim@nesakyazilim.com' }
+if (-not $Account) {
+    $Account = Read-Host 'Giriş yapılacak Google Workspace hesabı [iletisim@nesakyazilim.com]'
+    if (-not $Account) { $Account = 'iletisim@nesakyazilim.com' }
 }
-$sec = Read-Host 'Bu hesabın 16 haneli uygulama şifresi (yazarken görünmez)' -AsSecureString
+if (-not $From) {
+    $From = Read-Host "Gönderen adresi (bu hesap ya da takma adı, ör. bildirim@nesakyazilim.com) [$Account]"
+    if (-not $From) { $From = $Account }
+}
+$sec = Read-Host "$Account hesabının 16 haneli uygulama şifresi (yazarken görünmez)" -AsSecureString
 $bstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($sec)
 try { $pass = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($bstr) } finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($bstr) }
 $pass = ($pass -replace '\s', '')
@@ -58,14 +63,14 @@ if (-not (Test-Path $KeyDir)) { New-Item -ItemType Directory -Path $KeyDir | Out
 icacls $KeyDir /inheritance:r /grant:r 'Administrators:(OI)(CI)F' 'SYSTEM:(OI)(CI)F' | Out-Null
 $cfg = [ordered]@{
     smtpHost = 'smtp.gmail.com'; smtpPort = 465
-    smtpUser = $From; smtpPass = $pass
+    smtpUser = $Account; smtpPass = $pass
     from = $From; fromName = 'BSM Mekanik Web Sitesi'
     to = $To; port = 8787
 }
 [IO.File]::WriteAllText($Config, ($cfg | ConvertTo-Json), $Utf8)
 $pass = $null
 Write-Host "   ayarlar kaydedildi: $Config (yalnızca Yönetici/SYSTEM erişebilir)"
-Write-Host "   gönderen: $From  ->  alıcı: $To"
+Write-Host "   hesap: $Account   gönderen: $From  ->  alıcı: $To"
 
 # --- Deneme e-postası
 Say "Deneme e-postası gönderiliyor ($To)"
@@ -80,6 +85,7 @@ if ($testCode -ne 0) {
     Write-Host '  - Uygulama şifresi yanlış kopyalandı (boşluklar önemli değil, harfler önemli)'
     Write-Host '  - Bu hesapta 2 Adımlı Doğrulama açık değil / uygulama şifresi o hesaba ait değil'
     Write-Host '  - Sunucudan dışarıya 465 portu kapalı (güvenlik duvarı)'
+    Write-Host '  - Gönderen adresi takma adsa: Gmail > Ayarlar > Hesaplar > Farklı bir adresten posta gönder kısmına eklenmeli'
     Die 'Deneme e-postası gönderilemedi. Betiği düzeltip tekrar çalıştırın.'
 }
 
