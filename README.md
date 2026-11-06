@@ -107,7 +107,7 @@ WhatsApp düğmesi Mert'in cep numarasına bağlıdır (`content.py` → `whatsa
 - Site çerez kullanmaz; iletişim sayfasındaki Google Haritası yalnızca "Haritayı göster" ile yüklenir.
 - Form alıcının kayıtlarında (`form.log`) e-posta ve IP adresleri maskelenir.
 - **Bilgi Toplumu Hizmetleri (TTK md. 1524):** `src/content.py` → `trade_registry`, `mersis`, `tax_office`, `tax_no`.
-  Doldurulunca footer'da ve KVKK sayfasında otomatik görünür; boşken gösterilmez. **Firmadan bekleniyor.**
+  Doldurulunca footer'da ve KVKK sayfasında otomatik görünür. Sicil, MERSİS ve vergi no girildi; vergi dairesi adı bekleniyor.
 - Öneri: metinlerin bir avukat tarafından gözden geçirilmesi; firma ile barındırma sağlayıcısı arasında veri işleme sözleşmesi.
 
 ## Kendi sunucunda (VDS) yayın

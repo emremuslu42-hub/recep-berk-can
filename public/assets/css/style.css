@@ -823,3 +823,17 @@ h1, h2, h3, h4 {
 .map-note { font-size: 13.5px; color: var(--muted); }
 .map-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 6px; }
 .map-actions .btn { height: 46px; padding: 0 20px; font-size: 14px; }
+
+/* Son rötuşlar */
+/* Açılış başlığı tırnakla başlar: tırnak satırın soluna asılır, metin hizalı kalır */
+.ref-hero h1 { text-indent: -0.42em; }
+
+@media (max-width: 760px) {
+  /* WhatsApp düğmesi mobilde içeriğin üstüne binmesin */
+  .wa-float { right: 14px; bottom: 14px; width: 48px; height: 48px; }
+  .wa-float svg { width: 25px; height: 25px; }
+  /* Referans filtreleri mobilde tek satır, yana kaydırılır */
+  .filter-bar { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-left: calc(var(--gutter) * -1); margin-right: calc(var(--gutter) * -1); padding: 0 var(--gutter) 4px; }
+  .filter-bar::-webkit-scrollbar { display: none; }
+  .filter-bar button { flex: 0 0 auto; }
+}

@@ -342,8 +342,8 @@ def cta(lang):
 
 
 COMPANY_INFO_LABELS = {
-    "tr": {"trade_registry": "Ticaret Sicil", "mersis": "MERSİS No", "tax": "Vergi Dairesi / No"},
-    "en": {"trade_registry": "Trade Registry", "mersis": "MERSIS No", "tax": "Tax Office / No"},
+    "tr": {"trade_registry": "Ticaret Sicil", "mersis": "MERSİS No", "tax": "Vergi Dairesi / No", "tax_no": "Vergi No"},
+    "en": {"trade_registry": "Trade Registry", "mersis": "MERSIS No", "tax": "Tax Office / No", "tax_no": "Tax No"},
 }
 
 
@@ -355,9 +355,10 @@ def company_info(lang):
         items.append((L["trade_registry"], C["trade_registry"]))
     if C.get("mersis"):
         items.append((L["mersis"], C["mersis"]))
-    tax = " / ".join(x for x in (C.get("tax_office"), C.get("tax_no")) if x)
-    if tax:
-        items.append((L["tax"], tax))
+    if C.get("tax_office") and C.get("tax_no"):
+        items.append((L["tax"], f'{C["tax_office"]} / {C["tax_no"]}'))
+    elif C.get("tax_no"):
+        items.append((L["tax_no"], C["tax_no"]))
     return items
 
 
