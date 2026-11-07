@@ -74,7 +74,7 @@ Alan adları bağlandıktan sonra yapılacaklar:
 - **Wikimedia Commons** (CC BY-SA 4.0, künyesi referanslar sayfasında):
   `ozyegin.webp` — Özyeğin University Campus, Bo yaser
 - **Hizmet görselleri**: [Unsplash](https://unsplash.com/license)
-- **Kurumsal fotoğraf** (`hizmet/ekip.webp`): [Pexels](https://www.pexels.com/license/) #9052545 (Shvets Production, kırpılmış)
+- **Kurumsal fotoğraf** (`hizmet/ekip.webp`): [Pexels](https://www.pexels.com/license/) #32845685 (Sergey Sergeev; kırpıldı, baretteki logo rötuşla kaldırıldı)
 - **Videolar**: [Pexels](https://www.pexels.com/license/) — `hero.mp4` (#34775814), `tesisat.mp4` (#30243437)
 - **Logo**: Firmanın logo dosyasından vektöre çevrildi (`src/icons.py`, `assets/img/logo-mark.svg`).
 
