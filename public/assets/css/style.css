@@ -320,7 +320,7 @@ h1, h2, h3, h4 {
 .split .lead { margin-top: 22px; }
 
 .media-stack { position: relative; padding: 0 0 40px 40px; }
-.media-stack img { width: 100%; aspect-ratio: 4 / 4.4; object-fit: cover; border-radius: var(--radius); }
+.media-stack img { width: 100%; aspect-ratio: 6 / 5; object-fit: cover; border-radius: var(--radius); }
 .media-stack::before { content: ""; position: absolute; left: 0; bottom: 0; width: 70%; height: 70%; border-radius: var(--radius); background: var(--sky); z-index: -1; }
 .media-badge {
   position: absolute;
